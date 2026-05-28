@@ -174,3 +174,14 @@ src/__pycache__/
 tests/__pycache__/
 
 # End of https://www.gitignore.io/api/linux,visualstudiocode,jetbrains+all,sublimetext,vim
+
+# Node & Next.js build directories
+node_modules/
+.next/
+out/
+.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+implementation_plan.md

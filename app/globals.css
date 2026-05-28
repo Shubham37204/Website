@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme tokens ────────────────────────────────── */
+:root {
+  --bg: #050505;
+  --bg-card: #0e0e0e;
+  --bg-card-hover: #161616;
+  --glass-bg: rgba(10, 10, 10, 0.75);
+  --border: rgba(255, 255, 255, 0.06);
+
+  --accent: #f59e0b;
+  --accent-muted: rgba(245, 158, 11, 0.08);
+  --accent-glow: rgba(245, 158, 11, 0.2);
+  --accent-border: rgba(245, 158, 11, 0.18);
+
+  --text-primary: #f0f0f0;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+
+  color-scheme: dark;
+}
+
+/* Light mode overrides */
+html.light {
+  --bg: #fafafa;
+  --bg-card: #f4f4f5;
+  --bg-card-hover: #e4e4e7;
+  --glass-bg: rgba(250, 250, 250, 0.85);
+  --border: rgba(0, 0, 0, 0.08);
+
+  --accent: #d97706;
+  --accent-muted: rgba(217, 119, 6, 0.1);
+  --accent-glow: rgba(217, 119, 6, 0.2);
+  --accent-border: rgba(217, 119, 6, 0.2);
+
+  --text-primary: #111111;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+
+  color-scheme: light;
+}
+
+/* ─── Base reset ──────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  /* Smooth theme switch */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ─── Dot grid ────────────────────────────────────── */
+.bg-dots {
+  background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+html.light .bg-dots {
+  background-image: radial-gradient(rgba(217, 119, 6, 0.08) 1px, transparent 1px);
+}
+
+/* ─── Glass surface ───────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+}
+
+/* ─── Glow orb ────────────────────────────────────── */
+.glow-orb {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.09) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(50px);
+}
+html.light .glow-orb {
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.06) 0%, transparent 70%);
+}
+
+/* ─── Float animation ─────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-9px); }
+}
+
+.float-slow   { animation: float 6s ease-in-out infinite; }
+.float-medium { animation: float 4.5s ease-in-out infinite; }
+.float-fast   { animation: float 3s ease-in-out infinite; }
+
+/* ─── Theme toggle button ─────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
