@@ -1,152 +1,179 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { skills } from "@/lib/data";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Code2, Globe, Database, BrainCircuit, Wrench } from "lucide-react";
+import { BrainCircuit, Code2, Cpu, Database, Globe, Wrench } from "lucide-react";
+
+const categories = [
+  {
+    id: "languages",
+    title: "Languages",
+    description: "Core languages used for backend services, frontend interfaces, data work, and automation.",
+    icon: Code2,
+    color: "#f59e0b",
+    items: skills.languages,
+  },
+  {
+    id: "webFrameworks",
+    title: "Web Stack",
+    description: "Frameworks and UI systems used to ship full-stack web applications.",
+    icon: Globe,
+    color: "#22d3ee",
+    items: skills.webFrameworks,
+  },
+  {
+    id: "databases",
+    title: "Data Layer",
+    description: "Storage systems for relational, document, and serverless application data.",
+    icon: Database,
+    color: "#a78bfa",
+    items: skills.databases,
+  },
+  {
+    id: "aiml",
+    title: "AI / ML",
+    description: "Libraries and workflows for NLP, deep learning, and practical model experimentation.",
+    icon: BrainCircuit,
+    color: "#fb7185",
+    items: skills.aiml,
+  },
+  {
+    id: "toolsCloud",
+    title: "Tools",
+    description: "Development, cloud, deployment, and operations tools for production-minded projects.",
+    icon: Wrench,
+    color: "#34d399",
+    items: skills.toolsCloud,
+  },
+];
 
 export default function SkillsPage() {
-  const categories = [
-    {
-      id: "languages",
-      title: "Languages",
-      description: "Core languages I write for building applications, data analysis, and scripting.",
-      icon: <Code2 className="w-4 h-4" />,
-      color: "text-accent",
-      borderColor: "hover:border-accent/30",
-      accentBg: "bg-accent/5",
-      accentColor: "rgba(245, 158, 11, 0.4)",
-      items: skills.languages
-    },
-    {
-      id: "webFrameworks",
-      title: "Web & Frameworks",
-      description: "Frontend and backend web frameworks I use to engineer modern scalable platforms.",
-      icon: <Globe className="w-4 h-4" />,
-      color: "text-cyan-400",
-      borderColor: "hover:border-cyan-400/30",
-      accentBg: "bg-cyan-400/5",
-      accentColor: "rgba(34, 211, 238, 0.4)",
-      items: skills.webFrameworks
-    },
-    {
-      id: "databases",
-      title: "Databases",
-      description: "Relational, document-based, and serverless data storage systems.",
-      icon: <Database className="w-4 h-4" />,
-      color: "text-purple-400",
-      borderColor: "hover:border-purple-400/30",
-      accentBg: "bg-purple-400/5",
-      accentColor: "rgba(167, 139, 250, 0.4)",
-      items: skills.databases
-    },
-    {
-      id: "aiml",
-      title: "AI / Machine Learning",
-      description: "Libraries and tools for natural language processing, deep learning, and data computation.",
-      icon: <BrainCircuit className="w-4 h-4" />,
-      color: "text-red-400",
-      borderColor: "hover:border-red-400/30",
-      accentBg: "bg-red-400/5",
-      accentColor: "rgba(248, 113, 113, 0.4)",
-      items: skills.aiml
-    },
-    {
-      id: "toolsCloud",
-      title: "Tools & DevOps",
-      description: "Development tools, containerization, cloud hosting, and orchestration systems.",
-      icon: <Wrench className="w-4 h-4" />,
-      color: "text-emerald-400",
-      borderColor: "hover:border-emerald-400/30",
-      accentBg: "bg-emerald-400/5",
-      accentColor: "rgba(52, 211, 153, 0.4)",
-      items: skills.toolsCloud
-    }
-  ];
-
   const [activeTab, setActiveTab] = useState(categories[0].id);
   const activeCategory = categories.find((cat) => cat.id === activeTab) || categories[0];
+  const ActiveIcon = activeCategory.icon;
+
+  const orbitItems = useMemo(() => {
+    const merged = [
+      ...skills.languages,
+      ...skills.webFrameworks,
+      ...skills.databases,
+      ...skills.aiml,
+      ...skills.toolsCloud,
+    ];
+    return merged.slice(0, 16);
+  }, []);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-8 font-sans">
-      <ScrollReveal className="flex flex-col gap-3 border-b border-border pb-6">
-        <h1 className="text-3xl md:text-5xl font-bold font-comfortaa text-text-primary leading-tight">Forge</h1>
-        <p className="text-xs md:text-sm text-text-secondary max-w-xl leading-relaxed">
-          Languages, frameworks, databases, and development tools I work with.
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8 font-sans">
+      <ScrollReveal className="flex flex-col gap-3 pb-4">
+        <p className="font-mono text-xs uppercase tracking-[0.35em] text-accent">Technical Forge</p>
+        <h1 className="font-comfortaa text-4xl font-bold leading-tight text-text-primary md:text-6xl">Forge</h1>
+        <p className="max-w-2xl text-sm leading-relaxed text-text-secondary">
+          A practical map of the languages, frameworks, AI tooling, and deployment stack I use to build software.
         </p>
       </ScrollReveal>
 
-      {/* Tabs list */}
-      <ScrollReveal delay={100}>
-        <div className="flex flex-wrap gap-2 border-b border-border/40 pb-4 font-mono text-xs">
-          {categories.map((cat) => {
-            const isActive = activeTab === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all duration-300 ${
-                  isActive
-                    ? "bg-accent/10 text-accent border-accent/20 font-semibold shadow-[0_0_15px_rgba(245,158,11,0.08)]"
-                    : "border-border/60 text-text-secondary hover:text-text-primary hover:border-border"
-                }`}
-              >
-                {cat.icon}
-                <span>{cat.title.toUpperCase()}</span>
-              </button>
-            );
-          })}
-        </div>
-      </ScrollReveal>
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
+        <ScrollReveal delay={100} className="relative min-h-[620px] overflow-hidden rounded-2xl bg-card/25">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.12),transparent_34%),radial-gradient(circle_at_20%_20%,rgba(245,158,11,0.10),transparent_26%)]" />
+          <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/20" />
+          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/15" />
+          <div className="absolute left-1/2 top-1/2 h-[300px] w-[540px] -translate-x-1/2 -translate-y-1/2 rounded-[999px] border border-cyan-400/20" />
+          <div className="absolute left-1/2 top-1/2 h-[540px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-[999px] border border-cyan-400/20" />
+          <div className="absolute left-1/2 top-1/2 h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-2xl" />
 
-      {/* Selected Category Details & Badges */}
-      <ScrollReveal delay={200} key={activeTab}>
-        <div className="rounded-2xl glass p-6 md:p-8 border border-border flex flex-col gap-6 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-accent/[0.015] to-transparent" />
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/55 pb-5">
-            <div className="flex flex-col gap-1.5">
-              <h3 className={`text-xl font-bold font-comfortaa ${activeCategory.color} flex items-center gap-2`}>
-                {activeCategory.icon}
-                <span>{activeCategory.title}</span>
-              </h3>
-              <p className="text-xs text-text-secondary leading-relaxed max-w-xl font-sans">
-                {activeCategory.description}
-              </p>
-            </div>
-            {/* Skill count badge */}
-            <div className="px-3.5 py-1.5 rounded-xl bg-card border border-border text-[10px] font-mono text-text-muted flex items-center justify-center self-start sm:self-center gap-1.5">
-              <span className={`w-1.5 h-1.5 rounded-full`} style={{ backgroundColor: activeCategory.accentColor }} />
-              <span>{activeCategory.items.length} SKILLS</span>
-            </div>
+          <div className="absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-accent/30 bg-bg/80 shadow-[0_0_45px_rgba(245,158,11,0.18)]">
+            <Cpu className="mb-2 h-6 w-6 text-accent" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-text-muted">Core</span>
+            <span className="font-comfortaa text-sm font-bold text-text-primary">Stack</span>
           </div>
 
-          {/* Badges Flex Grid */}
-          <div className="flex flex-wrap gap-3 pt-2">
-            {activeCategory.items.map((skill, idx) => (
+          {orbitItems.map((skill, idx) => {
+            const angle = (idx / orbitItems.length) * Math.PI * 2 - Math.PI / 2;
+            const radiusX = idx % 2 === 0 ? 250 : 205;
+            const radiusY = idx % 2 === 0 ? 225 : 170;
+            const x = Math.cos(angle) * radiusX;
+            const y = Math.sin(angle) * radiusY;
+            const category = categories.find((cat) => cat.items.some((item) => item.name === skill.name)) || categories[0];
+
+            return (
               <div
                 key={skill.name}
-                className={`px-4 py-3 rounded-xl bg-card border border-border/60 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(255,255,255,0.02)] flex items-center gap-3 group cursor-default ${activeCategory.borderColor}`}
+                className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-xl border bg-bg/85 px-3 py-2 font-mono text-[11px] font-semibold text-text-secondary shadow-lg backdrop-blur-md"
+                style={{
+                  transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                  borderColor: `${category.color}55`,
+                  color: category.color,
+                }}
               >
-                {/* Visual Level indicator dot */}
-                <div className="relative w-2 h-2 flex items-center justify-center">
-                  <span className="absolute w-2 h-2 rounded-full opacity-35 group-hover:animate-ping" style={{ backgroundColor: activeCategory.accentColor }} />
-                  <span className="relative w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeCategory.accentColor }} />
-                </div>
-
-                <div className="flex flex-col">
-                  <span className="text-xs font-mono font-medium text-text-secondary group-hover:text-text-primary transition-colors">
-                    {skill.name}
-                  </span>
-                  <span className="text-[9px] font-mono text-text-muted">
-                    {skill.level}% proficiency
-                  </span>
-                </div>
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: category.color }} />
+                <span>{skill.name}</span>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </ScrollReveal>
+
+        <div className="flex flex-col gap-5">
+          <ScrollReveal delay={150}>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => {
+                const isActive = activeTab === cat.id;
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveTab(cat.id)}
+                    className="flex items-center gap-2 rounded-xl border px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300"
+                    style={{
+                      borderColor: isActive ? `${cat.color}66` : "var(--border)",
+                      color: isActive ? cat.color : "var(--text-secondary)",
+                      background: isActive ? `${cat.color}18` : "var(--bg-card)",
+                    }}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{cat.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={220} key={activeTab}>
+            <div className="rounded-2xl border border-border bg-card/60 p-6">
+              <div className="mb-6 flex items-start justify-between gap-4">
+                <div>
+                  <div className="mb-3 flex items-center gap-2" style={{ color: activeCategory.color }}>
+                    <ActiveIcon className="h-5 w-5" />
+                    <h2 className="font-comfortaa text-2xl font-bold">{activeCategory.title}</h2>
+                  </div>
+                  <p className="text-sm leading-relaxed text-text-secondary">{activeCategory.description}</p>
+                </div>
+                <span className="shrink-0 rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-text-muted">
+                  {activeCategory.items.length} skills
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {activeCategory.items.map((skill) => (
+                  <div key={skill.name} className="rounded-xl border border-border/70 bg-bg/55 p-4">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="font-mono text-sm font-semibold text-text-primary">{skill.name}</span>
+                      <span className="font-mono text-xs" style={{ color: activeCategory.color }}>{skill.level}%</span>
+                    </div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-card-hover">
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${skill.level}%`, backgroundColor: activeCategory.color }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
-      </ScrollReveal>
+      </div>
     </div>
   );
 }

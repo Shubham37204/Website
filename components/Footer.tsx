@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full py-8 px-6 mt-16 relative z-10 border-t border-border/40 font-mono text-[11px] text-text-muted">
+    <footer className="w-full py-8 px-6 mt-16 relative z-10 font-mono text-[11px] text-text-muted">
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 text-center">
         {/* Social Links Row */}
         <div className="flex items-center gap-4 mb-1">

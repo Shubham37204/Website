@@ -27,7 +27,7 @@ export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-12 font-sans">
       {/* Page Header */}
-      <ScrollReveal className="flex flex-col gap-3 border-b border-border pb-6">
+      <ScrollReveal className="flex flex-col gap-3 pb-6">
         <h1 className="text-3xl md:text-5xl font-bold font-comfortaa text-text-primary leading-tight">About Me</h1>
         <p className="text-xs md:text-sm text-text-secondary max-w-xl leading-relaxed">
           An insight into my core principles, education journey, and the motivations driving my technical pursuits.
@@ -87,7 +87,7 @@ export default function AboutPage() {
       {/* Core Values Section */}
       <div className="flex flex-col gap-6">
         <ScrollReveal>
-          <h2 className="text-lg font-bold font-comfortaa text-text-primary flex items-center gap-2 border-b border-border pb-2">
+          <h2 className="text-lg font-bold font-comfortaa text-text-primary flex items-center gap-2 pb-2">
             <span>Philosophy &amp; Values</span>
           </h2>
         </ScrollReveal>
@@ -112,7 +112,7 @@ export default function AboutPage() {
       {/* Education Summary */}
       <div className="flex flex-col gap-6">
         <ScrollReveal>
-          <h2 className="text-lg font-bold font-comfortaa text-text-primary flex items-center gap-2 border-b border-border pb-2">
+          <h2 className="text-lg font-bold font-comfortaa text-text-primary flex items-center gap-2 pb-2">
             <BookOpen className="w-4 h-4 text-accent" />
             <span>Academic Foundations</span>
           </h2>
@@ -147,7 +147,7 @@ export default function AboutPage() {
       {/* Achievements Section */}
       <div className="flex flex-col gap-6">
         <ScrollReveal>
-          <h2 className="text-lg font-bold font-comfortaa text-text-primary flex items-center gap-2 border-b border-border pb-2">
+          <h2 className="text-lg font-bold font-comfortaa text-text-primary flex items-center gap-2 pb-2">
             <Trophy className="w-4 h-4 text-yellow-500" />
             <span>Achievements</span>
           </h2>
@@ -174,10 +174,10 @@ export default function AboutPage() {
       {/* Footer CTA */}
       <ScrollReveal className="flex justify-center pt-2">
         <Link
-          href="/experience"
+          href="/credentials"
           className="px-5 py-2.5 rounded-xl border border-accent/25 bg-accent/5 text-accent text-xs font-mono font-semibold tracking-wider hover:bg-accent/15 transition-all duration-200 flex items-center gap-2"
         >
-          <span>VIEW WORK EXPERIENCE &amp; CREDENTIALS</span>
+          <span>VIEW RESUME &amp; CREDENTIALS</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
       </ScrollReveal>

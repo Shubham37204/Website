@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Comfortaa, DM_Sans, DM_Mono } from "next/font/google";
+import { Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 
-const comfortaa = Comfortaa({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-comfortaa",
-  weight: ["300", "400", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const dmSans = DM_Sans({
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   keywords: ["Shubham Bhardwaj", "Portfolio", "Full Stack Developer", "AI Engineer", "ML Engineer", "Next.js", "Python", "TensorFlow", "Ranchi"],
   openGraph: {
     title: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
-    description: "Personal portfolio website of Shubham Bhardwaj. Explore projects, experiences, and technical skills.",
+    description: "Personal portfolio website of Shubham Bhardwaj. Explore projects, credentials, and technical skills.",
     type: "website",
     locale: "en_US",
   },
@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${comfortaa.variable} ${dmSans.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{

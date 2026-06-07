@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Home, FolderGit2, ShieldAlert, Cpu, User, Menu, X } from "lucide-react";
+import {
+  Home,
+  FolderGit2,
+  ShieldAlert,
+  Cpu,
+  User,
+  Menu,
+  X,
+} from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,37 +21,54 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    const initialTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
-    setTheme(initialTheme);
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+      setTheme("light");
+    } else {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      setTheme("dark");
+    }
   }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
-    if (nextTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-    } else {
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-    }
+
+    document.documentElement.classList.remove("dark", "light");
+    document.documentElement.classList.add(nextTheme);
+
     localStorage.setItem("theme", nextTheme);
     setTheme(nextTheme);
   };
 
   const navLinks = [
     { name: "Home", href: "/", icon: <Home className="w-4 h-4" /> },
-    { name: "Projects", href: "/projects", icon: <FolderGit2 className="w-4 h-4" /> },
+    {
+      name: "Projects",
+      href: "/projects",
+      icon: <FolderGit2 className="w-4 h-4" />,
+    },
     { name: "Forge", href: "/skills", icon: <Cpu className="w-4 h-4" /> },
     { name: "Persona", href: "/about", icon: <User className="w-4 h-4" /> },
-    { name: "Credentials", href: "/experience", icon: <ShieldAlert className="w-4 h-4" /> },
+    {
+      name: "Credentials",
+      href: "/credentials",
+      icon: <ShieldAlert className="w-4 h-4" />,
+    },
   ];
 
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-4xl">
       <div className="relative rounded-2xl glass px-4 md:px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 border-accent/10">
-        
         {/* Brand Logo */}
-        <Link href="/" className="text-lg md:text-xl font-bold font-comfortaa text-accent hover:text-amber-500 transition-colors tracking-wide flex items-center gap-1.5">
+        <Link
+          href="/"
+          className="text-lg md:text-xl font-bold font-comfortaa text-accent hover:text-amber-500 transition-colors tracking-wide flex items-center gap-1.5"
+        >
           <span>shubham.dev</span>
           <span className="w-1.5 h-1.5 rounded-full bg-accent" />
         </Link>
@@ -79,7 +104,7 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="px-2.5 py-1.5 rounded-lg border border-border/80 bg-card hover:bg-card-hover font-mono text-[10px] font-bold tracking-widest text-text-secondary hover:text-accent transition-colors duration-200"
             >
-              {theme.toUpperCase()}
+              {theme === "dark" ? "LIGHT" : "DARK"}
             </button>
           )}
         </div>
@@ -92,7 +117,7 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="px-2.5 py-1.5 rounded-lg border border-border/80 bg-card font-mono text-[9px] font-bold tracking-wider text-text-secondary hover:text-accent transition-colors"
             >
-              {theme.toUpperCase()}
+              {theme === "dark" ? "LIGHT" : "DARK"}
             </button>
           )}
 
@@ -102,7 +127,11 @@ export default function Navbar() {
             className="p-1.5 rounded-lg text-text-primary hover:text-accent transition-colors"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
         </div>
       </div>
@@ -124,7 +153,9 @@ export default function Navbar() {
                 }`}
               >
                 {link.icon}
-                <span className="font-mono text-xs tracking-wider uppercase">{link.name}</span>
+                <span className="font-mono text-xs tracking-wider uppercase">
+                  {link.name}
+                </span>
               </Link>
             );
           })}

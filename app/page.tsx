@@ -44,10 +44,12 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-12 px-6">
         {/* Concentric circles background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-border rounded-full pointer-events-none opacity-40" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] border border-border rounded-full pointer-events-none opacity-30" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] border border-border rounded-full pointer-events-none opacity-20" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] border border-border rounded-full pointer-events-none opacity-10" />
+        <div className="absolute top-1/2 left-1/2 h-[82vmin] w-[82vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/15 pointer-events-none opacity-50" />
+        <div className="absolute top-1/2 left-1/2 h-[112vmin] w-[112vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/10 pointer-events-none opacity-60" />
+        <div className="absolute top-1/2 left-1/2 h-[142vmin] w-[142vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-purple-400/10 pointer-events-none opacity-50" />
+        <div className="absolute top-1/2 left-1/2 h-[172vmin] w-[172vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-border pointer-events-none opacity-60" />
+        <div className="absolute top-1/2 left-1/2 h-[56vmin] w-[112vmin] -translate-x-1/2 -translate-y-1/2 rounded-[999px] border border-cyan-400/10 pointer-events-none opacity-50" />
+        <div className="absolute top-1/2 left-1/2 h-[112vmin] w-[56vmin] -translate-x-1/2 -translate-y-1/2 rounded-[999px] border border-cyan-400/10 pointer-events-none opacity-50" />
         
         {/* Center glow dot */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent animate-pulse-glow pointer-events-none" />
@@ -58,7 +60,7 @@ export default function HomePage() {
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto flex flex-col items-center">
           <ScrollReveal delay={100} className="w-full flex flex-col items-center">
             <p className="text-[var(--text-muted)] text-xs md:text-sm tracking-[0.25em] uppercase mb-4 font-mono">HELLO! I&apos;M</p>
-            <h1 className="text-4xl md:text-7xl font-bold font-comfortaa tracking-tight text-text-primary mb-2 leading-none uppercase">
+            <h1 className="text-4xl md:text-7xl font-bold font-comfortaa tracking-tight text-text-primary mb-2 leading-none">
               {personalData.name}
             </h1>
             <p className="text-xs md:text-sm font-mono text-text-secondary tracking-wide mb-6">
@@ -67,8 +69,8 @@ export default function HomePage() {
           </ScrollReveal>
 
           {/* Role text cycler */}
-          <ScrollReveal delay={200} className="h-16 flex justify-center items-center mb-6 overflow-hidden">
-            <span className={`text-4xl md:text-6xl font-extrabold font-comfortaa bg-gradient-to-r from-accent via-purple-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 transform ${
+          <ScrollReveal delay={200} className="h-20 md:h-28 flex justify-center items-center mb-4 overflow-hidden">
+            <span className={`text-5xl md:text-8xl font-bold font-comfortaa bg-gradient-to-r from-accent via-emerald-300 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 transform ${
               animating ? "opacity-0 translate-y-3 scale-95" : "opacity-100 translate-y-0 scale-100"
             }`}>
               {roles[roleIndex]}
@@ -94,13 +96,15 @@ export default function HomePage() {
 
           {/* Action CTAs */}
           <ScrollReveal delay={500} className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/experience"
+            <a
+              href={personalData.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3.5 rounded-full font-mono text-xs tracking-wider font-semibold border border-accent/30 bg-accent/5 text-accent hover:bg-accent/15 hover:scale-105 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 flex items-center gap-2"
             >
               <FileText className="w-4 h-4" />
               <span>RESUME &amp; CV</span>
-            </Link>
+            </a>
             <Link
               href="/projects"
               className="px-8 py-3.5 rounded-full font-mono text-xs tracking-wider font-semibold border border-border bg-card text-text-secondary hover:text-text-primary hover:bg-card-hover hover:scale-105 transition-all duration-300 flex items-center gap-2"
@@ -113,7 +117,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. FEATURED PROJECTS PREVIEW (COMPACT 3-COL GRID) */}
-      <section className="py-20 px-6 max-w-4xl mx-auto w-full border-t border-border/40">
+      <section className="py-20 px-6 max-w-4xl mx-auto w-full">
         <ScrollReveal className="mb-10">
           <p className="text-[var(--text-muted)] text-xs tracking-[0.35em] uppercase mb-2 font-mono">Featured Work</p>
           <h2 className="text-3xl md:text-5xl font-bold font-comfortaa text-text-primary leading-tight">Projects</h2>
@@ -163,7 +167,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. ABOUT ME */}
-      <section className="py-20 px-6 max-w-4xl mx-auto w-full border-t border-border/40">
+      <section className="py-20 px-6 max-w-4xl mx-auto w-full">
         <ScrollReveal className="mb-10">
           <p className="text-[var(--text-muted)] text-xs tracking-[0.35em] uppercase mb-2 font-mono">Who I Am</p>
           <h2 className="text-3xl md:text-5xl font-bold font-comfortaa text-text-primary leading-tight">About Me</h2>
@@ -204,7 +208,7 @@ export default function HomePage() {
               </p>
             </div>
             
-            <p className="text-text-muted text-[11px] italic border-t border-border pt-3 font-sans">
+            <p className="text-text-muted text-[11px] italic pt-3 font-sans">
               &quot;Building intelligent systems at the intersection of full-stack &amp; AI/ML.&quot;
             </p>
           </ScrollReveal>
@@ -244,7 +248,7 @@ export default function HomePage() {
       </section>
 
       {/* 4. REACH OUT (WORKFLOW & CALL TO ACTIONS) */}
-      <section className="py-20 px-6 max-w-4xl mx-auto w-full border-t border-border/40">
+      <section className="py-20 px-6 max-w-4xl mx-auto w-full">
         <ScrollReveal className="mb-10">
           <p className="text-[var(--text-muted)] text-xs tracking-[0.35em] uppercase mb-2 font-mono">Skills • Workflow • Identity</p>
           <h2 className="text-3xl md:text-5xl font-bold font-comfortaa text-text-primary leading-tight">Reach Out</h2>

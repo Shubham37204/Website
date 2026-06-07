@@ -55,7 +55,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-4 pt-4 border-t border-border">
+      <div className="flex flex-col gap-4 pt-4">
         {/* Tech Badges */}
         <div className="flex flex-wrap gap-1.5">
           {project.tech.map((tech) => (

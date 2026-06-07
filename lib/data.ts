@@ -9,7 +9,7 @@ export const personalData = {
   coordinates: "23.3441° N, 85.3096° E",
   github: "https://github.com/Shubham37204",
   linkedin: "https://www.linkedin.com/in/shubham-bhardwaj-83028b212/",
-  resumeUrl: "https://drive.google.com/file/d/1BWS75P7D2t5yT-Xq6V3Z1c0bVqJ6ZfXp/view?usp=sharing",
+  resumeUrl: "https://drive.google.com/file/d/1Sl3d5tR9WT6ugdsC6IgIhg8Me5WBNpm1/view?usp=drive_link",
 };
 
 export const projects = [
@@ -60,21 +60,6 @@ export const projects = [
     github: "https://github.com/Shubham37204/MyGit",
     accent: "#00d9ff", // Cyan
     date: "Mar 2026"
-  }
-];
-
-export const experience = [
-  {
-    role: "Frontend Developer Intern",
-    company: "EmpowerU EdTech Pvt. Ltd.",
-    location: "Ranchi, Jharkhand",
-    period: "May 2025 – July 2025",
-    bullets: [
-      "Built a multilingual content delivery app using Next.js and TypeScript, incorporating dynamic route patterns and modular component designs.",
-      "Designed a centralized Master Module for shared content management, reducing redundant code bases by 30% across multiple platform sections.",
-      "Developed interactive and reusable UI components with optimized client-side workflows, enhancing navigation speed, visual consistency, and app scalability."
-    ],
-    tech: ["Next.js", "TypeScript", "React.js", "Tailwind CSS", "HTML5/CSS3"]
   }
 ];
 
@@ -202,4 +187,3 @@ export const certifications = [
     date: "Apr 2026"
   }
 ];
-
