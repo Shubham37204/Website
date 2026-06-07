@@ -2,12 +2,33 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Home, FolderGit2, ShieldAlert, Cpu, User, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const initialTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    setTheme(initialTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    if (nextTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", nextTheme);
+    setTheme(nextTheme);
+  };
 
   const navLinks = [
     { name: "Home", href: "/", icon: <Home className="w-4 h-4" /> },
@@ -19,43 +40,69 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-4xl">
-      <div className="relative rounded-2xl glass px-4 md:px-6 py-3 flex items-center justify-between shadow-2xl transition-all duration-300 border-accent/10 hover:border-accent/20">
+      <div className="relative rounded-2xl glass px-4 md:px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 border-accent/10">
         
         {/* Brand Logo */}
-        <Link href="/" className="text-lg md:text-xl font-bold font-comfortaa text-accent hover:text-amber-400 transition-colors tracking-wide flex items-center gap-2">
+        <Link href="/" className="text-lg md:text-xl font-bold font-comfortaa text-accent hover:text-amber-500 transition-colors tracking-wide flex items-center gap-1.5">
           <span>shubham.dev</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-1.5 font-mono text-xs tracking-wider">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`relative px-3.5 py-1.5 rounded-xl transition-all duration-300 flex items-center gap-1.5 ${
-                  isActive
-                    ? "bg-accent/10 text-accent border border-accent/20 shadow-[0_0_15px_rgba(245,158,11,0.08)]"
-                    : "text-text-secondary hover:text-accent hover:bg-white/5 border border-transparent"
-                }`}
-              >
-                {link.icon}
-                <span>{link.name.toUpperCase()}</span>
-              </Link>
-            );
-          })}
+        {/* Desktop Navigation Links & Actions */}
+        <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center gap-1 font-mono text-xs tracking-wider">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                    isActive
+                      ? "bg-accent/10 text-accent font-semibold"
+                      : "text-text-secondary hover:text-accent"
+                  }`}
+                >
+                  {link.icon}
+                  <span>{link.name.toUpperCase()}</span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Divider */}
+          <div className="w-px h-4 bg-border" />
+
+          {/* Theme Toggle */}
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              className="px-2.5 py-1.5 rounded-lg border border-border/80 bg-card hover:bg-card-hover font-mono text-[10px] font-bold tracking-widest text-text-secondary hover:text-accent transition-colors duration-200"
+            >
+              {theme.toUpperCase()}
+            </button>
+          )}
         </div>
 
-        {/* Mobile Menu Buttons */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Mobile Actions */}
+        <div className="flex md:hidden items-center gap-3">
+          {/* Theme Toggle (Mobile) */}
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              className="px-2.5 py-1.5 rounded-lg border border-border/80 bg-card font-mono text-[9px] font-bold tracking-wider text-text-secondary hover:text-accent transition-colors"
+            >
+              {theme.toUpperCase()}
+            </button>
+          )}
+
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-text-primary hover:text-accent transition-colors"
+            className="p-1.5 rounded-lg text-text-primary hover:text-accent transition-colors"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -72,8 +119,8 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl flex items-center gap-3 transition-colors ${
                   isActive
-                    ? "bg-accent/15 text-accent border border-accent/20"
-                    : "text-text-secondary hover:text-accent hover:bg-white/5"
+                    ? "bg-accent/10 text-accent font-semibold"
+                    : "text-text-secondary hover:text-accent"
                 }`}
               >
                 {link.icon}

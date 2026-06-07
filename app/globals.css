@@ -4,26 +4,6 @@
 
 /* ─── Theme tokens ────────────────────────────────── */
 :root {
-  --bg: #050505;
-  --bg-card: #0e0e0e;
-  --bg-card-hover: #161616;
-  --glass-bg: rgba(10, 10, 10, 0.75);
-  --border: rgba(255, 255, 255, 0.06);
-
-  --accent: #f59e0b;
-  --accent-muted: rgba(245, 158, 11, 0.08);
-  --accent-glow: rgba(245, 158, 11, 0.2);
-  --accent-border: rgba(245, 158, 11, 0.18);
-
-  --text-primary: #f0f0f0;
-  --text-secondary: #a1a1aa;
-  --text-muted: #52525b;
-
-  color-scheme: dark;
-}
-
-/* Light mode overrides */
-html.light {
   --bg: #fafafa;
   --bg-card: #f4f4f5;
   --bg-card-hover: #e4e4e7;
@@ -40,6 +20,26 @@ html.light {
   --text-muted: #a1a1aa;
 
   color-scheme: light;
+}
+
+/* Dark mode overrides */
+html.dark {
+  --bg: #050505;
+  --bg-card: #0e0e0e;
+  --bg-card-hover: #161616;
+  --glass-bg: rgba(10, 10, 10, 0.75);
+  --border: rgba(255, 255, 255, 0.06);
+
+  --accent: #f59e0b;
+  --accent-muted: rgba(245, 158, 11, 0.08);
+  --accent-glow: rgba(245, 158, 11, 0.2);
+  --accent-border: rgba(245, 158, 11, 0.18);
+
+  --text-primary: #f0f0f0;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+
+  color-scheme: dark;
 }
 
 /* ─── Base reset ──────────────────────────────────── */
@@ -77,11 +77,11 @@ body {
 
 /* ─── Dot grid ────────────────────────────────────── */
 .bg-dots {
-  background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(217, 119, 6, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
 }
-html.light .bg-dots {
-  background-image: radial-gradient(rgba(217, 119, 6, 0.08) 1px, transparent 1px);
+html.dark .bg-dots {
+  background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1px, transparent 1px);
 }
 
 /* ─── Glass surface ───────────────────────────────── */
@@ -97,13 +97,13 @@ html.light .bg-dots {
   position: absolute;
   width: 360px;
   height: 360px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.06) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   filter: blur(50px);
 }
-html.light .glow-orb {
-  background: radial-gradient(circle, rgba(217, 119, 6, 0.06) 0%, transparent 70%);
+html.dark .glow-orb {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.09) 0%, transparent 70%);
 }
 
 /* ─── Float animation ─────────────────────────────── */

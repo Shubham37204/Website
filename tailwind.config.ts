@@ -9,15 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0a0a0a",
-        card: "#111111",
-        "card-hover": "#161616",
-        border: "rgba(255, 255, 255, 0.06)",
+        bg: "var(--bg)",
+        card: "var(--bg-card)",
+        "card-hover": "var(--bg-card-hover)",
+        border: "var(--border)",
         accent: {
-          DEFAULT: "#f59e0b", // Amber
-          glow: "rgba(245, 158, 11, 0.15)",
-          border: "rgba(245, 158, 11, 0.25)",
+          DEFAULT: "var(--accent)",
+          muted: "var(--accent-muted)",
+          glow: "var(--accent-glow)",
+          border: "var(--accent-border)",
         },
+        "text-primary": "var(--text-primary)",
+        "text-secondary": "var(--text-secondary)",
+        "text-muted": "var(--text-muted)",
       },
       fontFamily: {
         comfortaa: ["var(--font-comfortaa)", "Comfortaa", "sans-serif"],

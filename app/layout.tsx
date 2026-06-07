@@ -42,6 +42,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${comfortaa.variable} ${dmSans.variable} ${dmMono.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.classList.add(t);
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="bg-bg text-text-primary selection:bg-accent selection:text-bg overflow-x-hidden min-h-screen flex flex-col justify-between">
         <CustomCursor />
         {/* Futuristic Glowing Ambient Orbs */}

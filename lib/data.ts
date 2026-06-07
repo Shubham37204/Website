@@ -2,14 +2,14 @@ export const personalData = {
   name: "Shubham Bhardwaj",
   title: "Full Stack & AI/ML Engineer",
   tagline: "Building intelligent systems at the intersection of full-stack development and machine learning.",
-  bio: "I'm Shubham — an MCA student at Birla Institute of Technology, Mesra. I build robust web systems and neural architectures with clean engineering principles. Focused on high-performance applications, real-time collaboration, and custom NLP/ML pipelines.",
+  bio: "I'm Shubham — a graduate student at Birla Institute of Technology, Mesra. I build high-performance web systems and practical machine learning applications. I focus on collaborative tools, reliable backend engineering, and effective NLP workflows.",
   email: "shubhambhardwaj9575@gmail.com",
   phone: "+91 9931220269",
   location: "Ranchi, Jharkhand, India",
   coordinates: "23.3441° N, 85.3096° E",
   github: "https://github.com/Shubham37204",
   linkedin: "https://www.linkedin.com/in/shubham-bhardwaj-83028b212/",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "https://drive.google.com/file/d/1BWS75P7D2t5yT-Xq6V3Z1c0bVqJ6ZfXp/view?usp=sharing",
 };
 
 export const projects = [
@@ -143,3 +143,63 @@ export const achievements = [
     description: "Won 2nd place in a highly competitive college hackathon by designing and building an AI-based emotion-aware music recommendation system."
   }
 ];
+
+export const certifications = [
+  {
+    title: "Google IT Automation with Python Specialization",
+    issuer: "Google",
+    id: "52WXH2HUGCJB",
+    url: "https://coursera.org/verify/52WXH2HUGCJB",
+    pdf: "/certificates/Coursera 52WXH2HUGCJB.pdf",
+    date: "May 2026"
+  },
+  {
+    title: "Automating Real-World Tasks with Python",
+    issuer: "Google",
+    id: "4LBUCF7T5FEL",
+    url: "https://coursera.org/verify/4LBUCF7T5FEL",
+    pdf: "/certificates/Coursera 4LBUCF7T5FEL.pdf",
+    date: "May 2026"
+  },
+  {
+    title: "Configuration Management and the Cloud",
+    issuer: "Google",
+    id: "EKSXWGKKSDNX",
+    url: "https://coursera.org/verify/EKSXWGKKSDNX",
+    pdf: "/certificates/Coursera EKSXWGKKSDNX.pdf",
+    date: "Apr 2026"
+  },
+  {
+    title: "Introduction to Git and GitHub",
+    issuer: "Google",
+    id: "N4GEQYDZ42B9",
+    url: "https://coursera.org/verify/N4GEQYDZ42B9",
+    pdf: "/certificates/Coursera N4GEQYDZ42B9.pdf",
+    date: "Apr 2026"
+  },
+  {
+    title: "Crash Course on Python",
+    issuer: "Google",
+    id: "W7AJ7S5VZEAD",
+    url: "https://coursera.org/verify/W7AJ7S5VZEAD",
+    pdf: "/certificates/Coursera W7AJ7S5VZEAD.pdf",
+    date: "Mar 2026"
+  },
+  {
+    title: "Using Python to Interact with the Operating System",
+    issuer: "Google",
+    id: "WP7DTRVSSGPC",
+    url: "https://coursera.org/verify/WP7DTRVSSGPC",
+    pdf: "/certificates/Coursera WP7DTRVSSGPC.pdf",
+    date: "Mar 2026"
+  },
+  {
+    title: "Troubleshooting and Debugging Techniques",
+    issuer: "Google",
+    id: "ZSBJTT3852KC",
+    url: "https://coursera.org/verify/ZSBJTT3852KC",
+    pdf: "/certificates/Coursera ZSBJTT3852KC.pdf",
+    date: "Apr 2026"
+  }
+];
+
