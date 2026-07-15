@@ -12,7 +12,7 @@ export default function ProjectsPage() {
         <SectionHeader
           eyebrow="Portfolio"
           title="Projects"
-          description="Three production-quality projects covering real-time collaboration, applied NLP, and systems programming. Each built to understand the underlying technology, not just ship a feature."
+          description="Three production-quality projects covering real-time collaboration, medical NLP classification, and meeting intelligence pipelines."
           titleClassName="page-title"
         />
       </ScrollReveal>

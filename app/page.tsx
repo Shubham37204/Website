@@ -24,10 +24,10 @@ const credibilityPills = [
 
 export default function HomePage() {
   return (
-    <div className="w-full flex flex-col gap-20">
+    <div className="w-full flex flex-col gap-12">
 
-      {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden py-16 px-6">
+      {/* -- Hero ------------------------------------------- */}
+      <section className="relative min-h-[60vh] md:min-h-[64vh] flex items-center justify-center overflow-hidden py-10 px-6">
         {/* Subtle background dot grid inherited from layout */}
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center gap-6 px-4">
 
@@ -47,7 +47,7 @@ export default function HomePage() {
           <ScrollReveal delay={250}>
             <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl">
               Graduate student at BIT Mesra. I build real-time web apps,
-              NLP pipelines, and systems software — with a focus on
+              NLP pipelines, and systems software - with a focus on
               correctness, clean architecture, and proof-of-work projects.
             </p>
           </ScrollReveal>
@@ -88,7 +88,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Featured Projects ─────────────────────────────── */}
+      {/* -- Featured Projects ----------------------------- */}
       <section className="py-4 px-6 max-w-5xl mx-auto w-full">
         <ScrollReveal className="mb-8">
           <SectionHeader eyebrow="Featured work" title="Projects" />
@@ -141,7 +141,7 @@ export default function HomePage() {
         </ScrollReveal>
       </section>
 
-      {/* ── About snapshot ────────────────────────────────── */}
+      {/* -- About snapshot ---------------------------------- */}
       <section className="py-4 px-6 max-w-5xl mx-auto w-full">
         <ScrollReveal className="mb-8">
           <SectionHeader eyebrow="Who I am" title="About me" />
@@ -153,7 +153,7 @@ export default function HomePage() {
               <p className="text-text-muted text-xs font-mono tracking-wider uppercase">Engineering focus</p>
               <p className="text-text-secondary text-sm leading-relaxed">
                 I build real-time collaborative tools, scalable backend services, and NLP/ML pipelines.
-                My projects prioritize correctness, modularity, and clear API boundaries — not just
+                My projects prioritize correctness, modularity, and clean API boundaries - not just
                 making things work, but understanding why they work.
               </p>
               <p className="text-text-secondary text-sm leading-relaxed">

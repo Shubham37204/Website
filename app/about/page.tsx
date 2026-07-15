@@ -13,14 +13,14 @@ const engineeringPillars = [
     title: "Systems I like building",
     color: "#14b8a6",
     content:
-      "Real-time collaborative tools (CRDT, WebSockets), NLP classifiers with hybrid neural architectures, and low-level systems software like version control internals. I'm drawn to problems where the architecture matters as much as the feature.",
+      "Real-time collaborative tools (CRDT, WebSockets), NLP classifiers with hybrid neural architectures, and meeting transcription pipelines and vector search indexing. I'm drawn to problems where the architecture matters as much as the feature.",
   },
   {
     icon: Wrench,
     title: "How I think about quality",
     color: "#a78bfa",
     content:
-      "I write code as if the next person reading it is a stranger — modular functions, typed interfaces, and tests that document intent. In MyGit I used 11 decoupled modules and full unit coverage for a 12-command CLI. In CollabDocs I relied on Convex subscriptions instead of polling to keep state correct by design.",
+      "I write code as if the next person reading it is a stranger - modular functions, typed interfaces, and tests that document intent. In RecallAI I built robust queue-based transcript extractions and semantic vector queries. In CollabDocs I relied on Convex subscriptions instead of polling to keep state correct by design.",
   },
   {
     icon: Terminal,
@@ -33,7 +33,7 @@ const engineeringPillars = [
 
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-14">
+    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-10">
 
       {/* Page header */}
       <ScrollReveal>
@@ -51,13 +51,13 @@ export default function AboutPage() {
             <p>
               I'm <strong className="text-text-primary font-medium">Shubham Bhardwaj</strong>, a
               graduate student at Birla Institute of Technology, Mesra (MCA). I focus on
-              full-stack web engineering and applied machine learning — specifically at the
+              full-stack web engineering and applied machine learning - specifically at the
               intersection of backend systems and intelligent tooling.
             </p>
             <p>
               My three main projects cover distinct technical domains: real-time collaboration
               with CRDT and streaming AI (CollabDocs), NLP classification with a tribrid deep
-              neural network (SkimLit), and version control internals from the ground up (MyGit).
+              neural network (SkimLit), and meeting intelligence with vector search (RecallAI).
               Each one was built to actually understand the underlying system, not just use a library.
             </p>
             <p>
@@ -75,7 +75,7 @@ export default function AboutPage() {
               {[
                 { label: "Location", value: personalData.location },
                 { label: "Timezone", value: "GMT +5:30 (IST)" },
-                { label: "Program", value: "MCA — BIT Mesra" },
+                { label: "Program", value: "MCA - BIT Mesra" },
                 { label: "Focus", value: "Full-Stack + AI Engineering" },
                 { label: "Status", value: "Open to internships / roles" },
               ].map(({ label, value }) => (

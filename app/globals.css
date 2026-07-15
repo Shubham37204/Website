@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Theme tokens ────────────────────────────────── */
+/* --- Theme tokens ---------------------------------- */
 :root {
   --bg: #f8f9fa;
   --bg-card: #f1f3f5;
@@ -57,7 +57,7 @@ html.dark {
   color-scheme: dark;
 }
 
-/* ─── Base reset ──────────────────────────────────── */
+/* --- Base reset ------------------------------------ */
 *, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
@@ -80,7 +80,7 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ─── Scrollbar ───────────────────────────────────── */
+/* --- Scrollbar ------------------------------------- */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
@@ -89,7 +89,7 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* ─── Dot grid ────────────────────────────────────── */
+/* --- Dot grid -------------------------------------- */
 .bg-dots {
   background-image: radial-gradient(rgba(13, 148, 136, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
@@ -98,7 +98,7 @@ html.dark .bg-dots {
   background-image: radial-gradient(rgba(20, 184, 166, 0.07) 1px, transparent 1px);
 }
 
-/* ─── Glass surface ───────────────────────────────── */
+/* --- Glass surface --------------------------------- */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
@@ -106,7 +106,7 @@ html.dark .bg-dots {
   border: 1px solid var(--border);
 }
 
-/* ─── Glow orb ────────────────────────────────────── */
+/* --- Glow orb -------------------------------------- */
 .glow-orb {
   position: absolute;
   width: 360px;
@@ -120,7 +120,7 @@ html.dark .glow-orb {
   background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
 }
 
-/* ─── Float animation ─────────────────────────────── */
+/* --- Float animation ------------------------------- */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-9px); }
@@ -138,7 +138,7 @@ html.dark .glow-orb {
   }
 }
 
-/* ─── Component layer ─────────────────────────────── */
+/* --- Component layer ------------------------------- */
 @layer components {
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;

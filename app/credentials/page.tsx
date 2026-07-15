@@ -10,7 +10,7 @@ import { Download, ArrowRight, Award, ExternalLink, FileText } from "lucide-reac
 
 export default function CredentialsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-12">
+    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-10">
 
       {/* Page header */}
       <ScrollReveal>
@@ -21,7 +21,7 @@ export default function CredentialsPage() {
         />
       </ScrollReveal>
 
-      {/* Resume — hero-style CTA */}
+      {/* Resume - hero-style CTA */}
       <ScrollReveal delay={100}>
         <div className="rounded-xl border border-accent/30 bg-accent/[0.04] p-6 md:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div className="flex items-start gap-4">
@@ -31,7 +31,7 @@ export default function CredentialsPage() {
             <div className="flex flex-col gap-1">
               <h2 className="text-lg font-bold font-display text-text-primary">Resume / CV</h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Current PDF resume — full project details, education, and technical skills.
+                Current PDF resume - full project details, education, and technical skills.
               </p>
               <p className="text-xs font-mono text-text-muted mt-1">
                 Full-Stack &amp; AI Engineer &middot; BIT Mesra &middot; 2026
@@ -59,7 +59,7 @@ export default function CredentialsPage() {
               Certifications
             </h2>
             <p className="text-sm text-text-secondary">
-              All issued by Google via Coursera — verified and linked.
+              All issued by Google via Coursera - verified and linked.
             </p>
           </div>
         </ScrollReveal>

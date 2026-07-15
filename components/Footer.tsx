@@ -35,7 +35,7 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-text-muted">
           <span>&copy; {currentYear} {personalData.name}</span>
-          <span className="hidden sm:inline text-border">·</span>
+          <span className="hidden sm:inline text-border">|</span>
           <span>Built with Next.js &amp; Tailwind</span>
         </div>
       </div>

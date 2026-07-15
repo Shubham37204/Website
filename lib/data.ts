@@ -2,14 +2,14 @@ export const personalData = {
   name: "Shubham Bhardwaj",
   title: "Full Stack & AI/ML Engineer",
   tagline: "Building intelligent systems at the intersection of full-stack development and machine learning.",
-  bio: "I'm Shubham — a graduate student at Birla Institute of Technology, Mesra. I build high-performance web systems and practical machine learning applications. I focus on collaborative tools, reliable backend engineering, and effective NLP workflows.",
+  bio: "I'm Shubham - a graduate student at Birla Institute of Technology, Mesra. I build high-performance web systems and practical machine learning applications. I focus on collaborative tools, reliable backend engineering, and effective NLP workflows.",
   email: "shubhambhardwaj9575@gmail.com",
   phone: "+91 9931220269",
   location: "Ranchi, Jharkhand, India",
-  coordinates: "23.3441° N, 85.3096° E",
+  coordinates: "23.3441 deg N, 85.3096 deg E",
   github: "https://github.com/Shubham37204",
   linkedin: "https://www.linkedin.com/in/shubham-bhardwaj-83028b212/",
-  resumeUrl: "https://drive.google.com/file/d/1Sl3d5tR9WT6ugdsC6IgIhg8Me5WBNpm1/view?usp=drive_link",
+  resumeUrl: "https://drive.google.com/file/d/1J6IH3PFfcJzSOSS4skuro0sdkDwJyE_j/view?usp=drive_link",
 };
 
 export const projects = [
@@ -17,7 +17,7 @@ export const projects = [
     title: "CollabDocs",
     tagline: "Real-time Collaborative Editor with Streaming AI Assistant",
     description: "Architected a real-time collaborative document editor featuring conflict-free editing, live cursors, and an integrated Llama-3 inline writing assistant.",
-    problem: "Simultaneous editing causes conflicts without coordination — solved with CRDT-based merge semantics so edits never overwrite each other.",
+    problem: "Simultaneous editing causes conflicts without coordination - solved with CRDT-based merge semantics so edits never overwrite each other.",
     details: [
       "Engineered multi-user synchronization with Y.js CRDT and Liveblocks WebSockets for zero-latency cursor tracking.",
       "Integrated Groq AI (Llama 3) streaming API to power an inline editor with 6 preset writing assistant actions.",
@@ -35,7 +35,7 @@ export const projects = [
     title: "SkimLit",
     tagline: "Medical Abstract Classification NLP Pipeline",
     description: "Designed an end-to-end NLP classifier mapping PubMed randomized controlled trial abstracts into sequential roles using a high-performance deep hybrid network.",
-    problem: "Medical literature is dense — researchers spend hours manually parsing abstract structure that a trained model can classify in milliseconds.",
+    problem: "Medical literature is dense - researchers spend hours manually parsing abstract structure that a trained model can classify in milliseconds.",
     details: [
       "Developed a Tribrid deep neural network combining token-level (Universal Sentence Encoder), character-level BiLSTM, and positional embeddings.",
       "Trained and compared classification models ranging from TF-IDF baselines through 1D CNNs to multi-input hybrid architectures.",
@@ -50,20 +50,20 @@ export const projects = [
     date: "Feb 2026"
   },
   {
-    title: "MyGit",
-    tagline: "Git-Compatible Version Control System from Scratch",
-    description: "Engineered a local version control system in pure Python implementing core content-addressable storage algorithms and branch management from the ground up.",
-    problem: "Understanding how Git actually works requires building one — implemented blob storage, three-way merge, and a 12-command CLI using only Python standard library.",
+    title: "RecallAI",
+    tagline: "Meeting Intelligence & Vector Search Pipeline",
+    description: "Developed a meeting intelligence tool that generates transcripts, structured summaries, and action-item tracking from recorded audio.",
+    problem: "Finding specific action items or reviewing discussion points in hours of meeting audio is time-consuming without searchable, structured records.",
     details: [
-      "Built a content-addressable blob storage system using SHA-1 hashing, implementing automatic deduplication and standard git object store layout.",
-      "Created a staging area model and symbolic ref architecture with 11 decoupled modules using standard libraries.",
-      "Engineered branch merging incorporating lowest common ancestor (LCA) detection, three-way merge logic, conflict markers, and fast-forward optimizations.",
-      "Implemented a stash stack, unified color diffs, and an ASCII commit graph visualization on an interactive 12-command CLI with full unit-test coverage."
+      "Built a robust transcript extraction pipeline utilizing Speech-to-Text APIs for audio processing.",
+      "Integrated vector embeddings with a vector store for semantic querying across transcription chunks.",
+      "Shipped an automated pipeline to synthesize and structure key decisions, summaries, and tasks.",
+      "Designed clean backend API routes using FastAPI with queue-based processing for audio ingestion."
     ],
-    tech: ["Python", "Standard Lib", "argparse", "hashlib", "difflib", "Unit Testing"],
-    tags: ["Version Control Internals", "Systems Programming", "CLI Tool", "Pure Python"],
-    impact: "Pure standard library VCS, zero external dependencies",
-    github: "https://github.com/Shubham37204/MyGit",
+    tech: ["Python", "FastAPI", "Vector DB", "LangChain", "OpenAI API", "Celery", "Docker"],
+    tags: ["Speech-to-Text", "Vector Search", "LLM Pipeline", "API Backend"],
+    impact: "Built a searchable meeting-memory pipeline for transcripts, summaries, and action-item retrieval.",
+    github: "https://github.com/Shubham37204/RecallAI",
     accent: "#00d9ff",
     date: "Mar 2026"
   }
@@ -74,7 +74,7 @@ export const education = [
     degree: "Master of Computer Applications (MCA)",
     institution: "Birla Institute of Technology, Mesra",
     location: "Ranchi, Jharkhand",
-    period: "Aug 2024 – Present",
+    period: "Aug 2024 - Present",
     bullets: [
       "Advancing core concepts in system design, database architectures, network engineering, and advanced algorithm paradigms."
     ]
@@ -83,7 +83,7 @@ export const education = [
     degree: "Bachelor of Computer Applications (BCA)",
     institution: "Birla Institute of Technology, Mesra",
     location: "Ranchi, Jharkhand",
-    period: "Oct 2021 – May 2024",
+    period: "Oct 2021 - May 2024",
     bullets: [
       "Graduated with a cumulative GPA of 8.0.",
       "Acquired solid fundamental knowledge in computer systems, object-oriented programming, and mathematical structures."
@@ -183,7 +183,7 @@ export const skillGroups = [
       { name: "Docker", projects: [] },
       { name: "AWS (EC2, S3, RDS)", projects: [] },
       { name: "Vercel", projects: ["CollabDocs"] },
-      { name: "Git & GitHub", projects: ["CollabDocs", "SkimLit", "MyGit"] },
+      { name: "Git & GitHub", projects: ["CollabDocs", "SkimLit", "RecallAI"] },
       { name: "Terraform", projects: [] },
     ],
   },
@@ -192,8 +192,8 @@ export const skillGroups = [
     title: "Testing / Tooling",
     color: "#34d399",
     items: [
-      { name: "Unit Testing (Python)", projects: ["MyGit"] },
-      { name: "argparse / CLI design", projects: ["MyGit"] },
+      { name: "Unit Testing (Python)", projects: ["RecallAI"] },
+      { name: "Asynchronous task queues", projects: ["RecallAI"] },
       { name: "Streamlit dashboards", projects: ["SkimLit"] },
       { name: "Kubernetes (basics)", projects: [] },
     ],

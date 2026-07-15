@@ -25,7 +25,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       {/* Accent top bar */}
       <div className="h-0.5 w-full flex-shrink-0" style={{ backgroundColor: project.accent }} />
 
-      <div className="flex flex-col gap-5 p-6 md:p-8 flex-1">
+      <div className="flex flex-col gap-4 p-5 md:p-6 flex-1">
 
         {/* Header row */}
         <div className="flex items-start justify-between gap-4">
