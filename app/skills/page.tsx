@@ -1,283 +1,287 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Link from "next/link";
 import { skillGroups } from "@/lib/data";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
-import Link from "next/link";
 
-// Map project names to their routes
 const projectLinks: Record<string, string> = {
   CollabDocs: "/projects",
   SkimLit: "/projects",
   RecallAI: "/projects",
 };
 
-// Define theme styles for light/dark mode to guarantee strong contrast
-const themeStyles: Record<
-  string,
-  { border: string; text: string; bg: string; color: string; hoverBg: string }
-> = {
-  frontend: {
-    border: "border-cyan-200 dark:border-cyan-500/20",
-    text: "text-cyan-800 dark:text-cyan-300",
-    bg: "bg-cyan-50/80 dark:bg-cyan-950/20",
-    hoverBg: "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
-    color: "#0891b2",
-  },
-  backend: {
-    border: "border-teal-200 dark:border-teal-500/20",
-    text: "text-teal-800 dark:text-teal-300",
-    bg: "bg-teal-50/80 dark:bg-teal-950/20",
-    hoverBg: "hover:bg-teal-100 dark:hover:bg-teal-900/30",
-    color: "#0d9488",
-  },
-  aiml: {
-    border: "border-violet-200 dark:border-violet-500/20",
-    text: "text-violet-800 dark:text-violet-300",
-    bg: "bg-violet-50/80 dark:bg-violet-950/20",
-    hoverBg: "hover:bg-violet-100 dark:hover:bg-violet-900/30",
-    color: "#7c3aed",
-  },
-  data: {
-    border: "border-rose-200 dark:border-rose-500/20",
-    text: "text-rose-800 dark:text-rose-300",
-    bg: "bg-rose-50/80 dark:bg-rose-950/20",
-    hoverBg: "hover:bg-rose-100 dark:hover:bg-rose-900/30",
-    color: "#e11d48",
-  },
-  devops: {
-    border: "border-amber-200 dark:border-amber-500/20",
-    text: "text-amber-800 dark:text-amber-300",
-    bg: "bg-amber-50/80 dark:bg-amber-950/20",
-    hoverBg: "hover:bg-amber-100 dark:hover:bg-amber-900/30",
-    color: "#d97706",
-  },
-  tooling: {
-    border: "border-emerald-200 dark:border-emerald-500/20",
-    text: "text-emerald-800 dark:text-emerald-300",
-    bg: "bg-emerald-50/80 dark:bg-emerald-950/20",
-    hoverBg: "hover:bg-emerald-100 dark:hover:bg-emerald-900/30",
-    color: "#059669",
+const groupMeta: Record<string, { color: string; short: string }> = {
+  frontend: { color: "#0891b2", short: "FE" },
+  backend: { color: "#0d9488", short: "API" },
+  aiml: { color: "#7c3aed", short: "AI" },
+  data: { color: "#e11d48", short: "DB" },
+  devops: { color: "#d97706", short: "OPS" },
+  tooling: { color: "#059669", short: "QA" },
+};
+
+const nodeLayout = [
+  { x: 18, y: 18, scale: 1.08, shade: "muted" },
+  { x: 70, y: 13, scale: 0.95, shade: "strong" },
+  { x: 84, y: 30, scale: 1.04, shade: "muted" },
+  { x: 52, y: 24, scale: 0.95, shade: "strong" },
+  { x: 32, y: 38, scale: 0.88, shade: "strong" },
+  { x: 16, y: 48, scale: 1.02, shade: "muted" },
+  { x: 68, y: 49, scale: 0.92, shade: "strong" },
+  { x: 41, y: 61, scale: 0.94, shade: "strong" },
+  { x: 62, y: 69, scale: 0.9, shade: "strong" },
+  { x: 25, y: 72, scale: 1, shade: "strong" },
+  { x: 77, y: 72, scale: 1.05, shade: "muted" },
+  { x: 39, y: 82, scale: 0.9, shade: "strong" },
+  { x: 56, y: 80, scale: 0.9, shade: "strong" },
+  { x: 12, y: 82, scale: 0.92, shade: "muted" },
+  { x: 87, y: 56, scale: 1, shade: "muted" },
+  { x: 72, y: 34, scale: 0.88, shade: "strong" },
+  { x: 48, y: 45, scale: 0.92, shade: "strong" },
+  { x: 58, y: 35, scale: 0.88, shade: "strong" },
+  { x: 28, y: 25, scale: 0.94, shade: "muted" },
+  { x: 20, y: 64, scale: 0.95, shade: "strong" },
+  { x: 82, y: 15, scale: 0.92, shade: "muted" },
+  { x: 75, y: 84, scale: 0.92, shade: "strong" },
+  { x: 46, y: 15, scale: 0.9, shade: "strong" },
+  { x: 31, y: 88, scale: 0.9, shade: "muted" },
+  { x: 88, y: 42, scale: 0.88, shade: "muted" },
+  { x: 64, y: 22, scale: 0.84, shade: "strong" },
+  { x: 49, y: 72, scale: 0.86, shade: "strong" },
+] as const;
+
+const nodeOverrides: Record<string, { x: number; y: number; scale: number; shade: "muted" | "strong"; color?: string; short?: string; priority?: boolean }> = {
+  "Streamlit dashboards": {
+    x: 16,
+    y: 62,
+    scale: 1.08,
+    shade: "strong",
+    color: "#ff4b4b",
+    short: "ST",
+    priority: true,
   },
 };
 
 export default function SkillsPage() {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<string>("all");
 
-  // Connection connections list for the TechMap network visual
-  const connections = [
-    { from: "frontend", to: "CollabDocs" },
-    { from: "backend", to: "CollabDocs" },
-    { from: "backend", to: "RecallAI" },
-    { from: "aiml", to: "CollabDocs" },
-    { from: "aiml", to: "RecallAI" },
-    { from: "aiml", to: "SkimLit" },
-    { from: "data", to: "CollabDocs" },
-    { from: "data", to: "RecallAI" },
-    { from: "devops", to: "CollabDocs" },
-    { from: "devops", to: "RecallAI" },
-    { from: "devops", to: "SkimLit" },
-    { from: "tooling", to: "RecallAI" },
-    { from: "tooling", to: "SkimLit" },
-  ];
+  const skillNodes = useMemo(
+    () =>
+      skillGroups.flatMap((group, groupIndex) =>
+        group.items.map((item, itemIndex) => {
+          const layout = nodeLayout[(groupIndex * 5 + itemIndex) % nodeLayout.length];
+          const override = nodeOverrides[item.name];
+          const meta = groupMeta[group.id] ?? { color: group.color, short: "SK" };
 
-  const getEdgeOpacity = (from: string, to: string) => {
-    if (!hoveredNode) return "stroke-slate-300 dark:stroke-zinc-800 opacity-40";
-    if (hoveredNode === from || hoveredNode === to) {
-      return "stroke-accent opacity-100 stroke-[2px]";
-    }
-    return "stroke-slate-200 dark:stroke-zinc-900 opacity-10";
-  };
+          return {
+            ...layout,
+            ...override,
+            id: `${group.id}-${item.name}`,
+            name: item.name
+              .replace("Convex (serverless)", "Convex")
+              .replace("Clerk (auth)", "Clerk")
+              .replace("Kubernetes (basics)", "Kubernetes")
+              .replace("AWS (EC2, S3, RDS)", "AWS"),
+            groupId: group.id,
+            groupTitle: group.title,
+            color: override?.color ?? meta.color,
+            short: override?.short ?? meta.short,
+            priority: Boolean(override?.priority),
+            projects: item.projects,
+          };
+        })
+      ),
+    []
+  );
 
-  const getNodeClass = (id: string) => {
-    if (!hoveredNode) return "opacity-100";
-    if (hoveredNode === id) return "opacity-100 scale-105";
-    
-    // Check if connected
-    const isConnected = connections.some(
-      (c) => (c.from === id && c.to === hoveredNode) || (c.to === id && c.from === hoveredNode)
-    );
-    return isConnected ? "opacity-100" : "opacity-35";
-  };
+  const activeGroup = selectedGroup === "all" ? null : selectedGroup;
+  const focusedGroup = hoveredGroup ?? activeGroup;
+  const selectedSkillGroup = skillGroups.find((group) => group.id === activeGroup);
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-6">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-5">
       <ScrollReveal>
         <SectionHeader
           eyebrow="Technical skills"
           title="Skills"
-          description="Technologies and tools I have applied in real projects - grouped by discipline and linked to where they appear in my work."
+          description="A map of the technologies I use across frontend systems, backend APIs, AI workflows, data, cloud, and tooling."
           titleClassName="page-title"
         />
       </ScrollReveal>
 
-      {/* Spacing reduced visual and details columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-6 items-start">
-        
-        {/* Left Column: Visual Skill Connections Network (TechMap) */}
-        <ScrollReveal delay={50} className="w-full lg:sticky lg:top-24">
-          <div className="flex flex-col gap-2">
-            <span className="text-[10px] font-mono tracking-wider text-text-muted uppercase">Architecture Connections Map</span>
-            <div className="w-full h-[240px] md:h-[340px] max-h-[240px] md:max-h-[340px] border border-border bg-card/65 rounded-xl overflow-hidden p-3 relative flex items-center justify-center">
-              
-              <svg 
-                viewBox="0 0 440 360" 
-                className="w-full h-full select-none"
-                style={{ contentVisibility: "auto" }}
-              >
-                {/* SVG Connections Paths */}
-                <g>
-                  {/* Frontend -> CollabDocs */}
-                  <path d="M 130 50 C 230 50, 230 90, 310 90" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("frontend", "CollabDocs")}`} />
-                  {/* Backend -> CollabDocs */}
-                  <path d="M 130 100 C 230 100, 230 90, 310 90" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("backend", "CollabDocs")}`} />
-                  {/* Backend -> RecallAI */}
-                  <path d="M 130 100 C 230 100, 230 180, 310 180" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("backend", "RecallAI")}`} />
-                  {/* AI/ML -> CollabDocs */}
-                  <path d="M 130 150 C 230 150, 230 90, 310 90" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("aiml", "CollabDocs")}`} />
-                  {/* AI/ML -> RecallAI */}
-                  <path d="M 130 150 C 230 150, 230 180, 310 180" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("aiml", "RecallAI")}`} />
-                  {/* AI/ML -> SkimLit */}
-                  <path d="M 130 150 C 230 150, 230 270, 310 270" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("aiml", "SkimLit")}`} />
-                  {/* Data & Storage -> CollabDocs */}
-                  <path d="M 130 200 C 230 200, 230 90, 310 90" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("data", "CollabDocs")}`} />
-                  {/* Data & Storage -> RecallAI */}
-                  <path d="M 130 200 C 230 200, 230 180, 310 180" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("data", "RecallAI")}`} />
-                  {/* Cloud -> CollabDocs */}
-                  <path d="M 130 250 C 230 250, 230 90, 310 90" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("devops", "CollabDocs")}`} />
-                  {/* Cloud -> RecallAI */}
-                  <path d="M 130 250 C 230 250, 230 180, 310 180" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("devops", "RecallAI")}`} />
-                  {/* Cloud -> SkimLit */}
-                  <path d="M 130 250 C 230 250, 230 270, 310 270" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("devops", "SkimLit")}`} />
-                  {/* Testing -> RecallAI */}
-                  <path d="M 130 300 C 230 300, 230 180, 310 180" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("tooling", "RecallAI")}`} />
-                  {/* Testing -> SkimLit */}
-                  <path d="M 130 300 C 230 300, 230 270, 310 270" fill="none" className={`transition-all duration-200 ${getEdgeOpacity("tooling", "SkimLit")}`} />
-                </g>
+      <ScrollReveal delay={80}>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setSelectedGroup("all")}
+            className={`rounded-full border px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors focus-ring ${
+              selectedGroup === "all"
+                ? "border-accent/40 bg-accent/10 text-accent shadow-sm"
+                : "border-border bg-card text-text-secondary hover:bg-card-hover hover:text-text-primary"
+            }`}
+          >
+            All
+          </button>
+          {skillGroups.map((group) => (
+            <button
+              key={group.id}
+              type="button"
+              onClick={() => setSelectedGroup(group.id)}
+              className={`rounded-full border px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors focus-ring ${
+                selectedGroup === group.id
+                  ? "bg-card-hover text-text-primary shadow-sm"
+                  : "border-border bg-card text-text-secondary hover:bg-card-hover hover:text-text-primary"
+              }`}
+              style={{
+                borderColor: selectedGroup === group.id ? `${groupMeta[group.id]?.color ?? group.color}66` : undefined,
+                color: selectedGroup === group.id ? groupMeta[group.id]?.color ?? group.color : undefined,
+              }}
+            >
+              {group.title}
+            </button>
+          ))}
+        </div>
+      </ScrollReveal>
 
-                {/* Left side: Domain Nodes */}
-                <g>
-                  {[
-                    { id: "frontend", name: "Frontend", y: 50, color: themeStyles.frontend.color },
-                    { id: "backend", name: "Backend", y: 100, color: themeStyles.backend.color },
-                    { id: "aiml", name: "AI / ML", y: 150, color: themeStyles.aiml.color },
-                    { id: "data", name: "Data Layer", y: 200, color: themeStyles.data.color },
-                    { id: "devops", name: "Cloud / DevOps", y: 250, color: themeStyles.devops.color },
-                    { id: "tooling", name: "Tooling / QA", y: 300, color: themeStyles.tooling.color },
-                  ].map((d) => (
-                    <g 
-                      key={d.id} 
-                      className={`cursor-pointer transition-all duration-200 ${getNodeClass(d.id)}`}
-                      onMouseEnter={() => setHoveredNode(d.id)}
-                      onMouseLeave={() => setHoveredNode(null)}
-                    >
-                      <circle cx="130" cy={d.y} r="6" fill={d.color} />
-                      <text 
-                        x="115" 
-                        y={d.y + 4} 
-                        textAnchor="end" 
-                        className="font-mono text-[10px] font-semibold fill-text-primary uppercase tracking-wider"
-                      >
-                        {d.name}
-                      </text>
-                    </g>
-                  ))}
-                </g>
+      <ScrollReveal delay={120}>
+        <section className="relative min-h-[560px] overflow-hidden rounded-lg border border-border bg-card/45 shadow-card md:min-h-[660px]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(77,208,225,0.18),transparent_38%)]" />
+          <div className="absolute inset-0 opacity-60 [background-image:radial-gradient(rgba(8,126,164,0.22)_1px,transparent_1px)] [background-size:32px_32px]" />
 
-                {/* Right side: Project Nodes */}
-                <g>
-                  {[
-                    { id: "CollabDocs", name: "CollabDocs", y: 90, color: "#f59e0b" },
-                    { id: "RecallAI", name: "RecallAI", y: 180, color: "#00d9ff" },
-                    { id: "SkimLit", name: "SkimLit", y: 270, color: "#a78bfa" },
-                  ].map((p) => (
-                    <g 
-                      key={p.id} 
-                      className={`cursor-pointer transition-all duration-200 ${getNodeClass(p.id)}`}
-                      onMouseEnter={() => setHoveredNode(p.id)}
-                      onMouseLeave={() => setHoveredNode(null)}
-                    >
-                      <circle cx="310" cy={p.y} r="6" fill={p.color} />
-                      <text 
-                        x="325" 
-                        y={p.y + 4} 
-                        className="font-display text-[11px] font-bold fill-text-primary"
-                      >
-                        {p.name}
-                      </text>
-                    </g>
-                  ))}
-                </g>
-              </svg>
-              
-              <div className="absolute bottom-2 right-3 text-[9px] font-mono text-text-muted">
-                Hover nodes to filter connections
-              </div>
-            </div>
+          <svg
+            viewBox="0 0 1000 620"
+            className="absolute left-1/2 top-1/2 h-[78%] max-h-[560px] w-[78%] max-w-[760px] -translate-x-1/2 -translate-y-1/2 overflow-visible text-cyan-400/40"
+            aria-hidden="true"
+          >
+            <defs>
+              <radialGradient id="skill-globe-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#67e8f9" stopOpacity="0.35" />
+                <stop offset="55%" stopColor="#67e8f9" stopOpacity="0.09" />
+                <stop offset="100%" stopColor="#67e8f9" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+
+            <circle cx="500" cy="310" r="246" fill="url(#skill-globe-glow)" />
+            <circle cx="500" cy="310" r="246" fill="none" stroke="currentColor" strokeWidth="1" />
+            {[70, 120, 170, 220].map((rx) => (
+              <ellipse key={`vertical-${rx}`} cx="500" cy="310" rx={rx} ry="246" fill="none" stroke="currentColor" strokeWidth="1" />
+            ))}
+            {[58, 112, 166, 220].map((ry) => (
+              <ellipse key={`horizontal-${ry}`} cx="500" cy="310" rx="246" ry={ry} fill="none" stroke="currentColor" strokeWidth="1" />
+            ))}
+            <path d="M254 310 C360 250 640 250 746 310" fill="none" stroke="currentColor" strokeWidth="1" />
+            <path d="M254 310 C360 370 640 370 746 310" fill="none" stroke="currentColor" strokeWidth="1" />
+            <line x1="500" y1="64" x2="500" y2="556" stroke="currentColor" strokeWidth="1" />
+            <line x1="254" y1="310" x2="746" y2="310" stroke="currentColor" strokeWidth="1" />
+
+            {skillNodes.slice(0, 18).map((node) => (
+              <line
+                key={`line-${node.id}`}
+                x1="500"
+                y1="310"
+                x2={node.x * 10}
+                y2={node.y * 6.2}
+                stroke={node.color}
+                strokeOpacity={focusedGroup && focusedGroup !== node.groupId ? 0.04 : 0.12}
+                strokeWidth="1"
+              />
+            ))}
+          </svg>
+
+          <div className="absolute inset-0">
+            {skillNodes.map((node, index) => {
+              const isActive = !focusedGroup || focusedGroup === node.groupId;
+              const isDimmed = !isActive;
+              const href = node.projects.length > 0 ? projectLinks[node.projects[0]] ?? "/projects" : undefined;
+              const chip = (
+                <span
+                  className={`group inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-bold shadow-md backdrop-blur-md transition-all duration-200 hover:-translate-y-1 hover:scale-105 ${
+                    node.shade === "muted" ? "bg-slate-700/45" : "bg-slate-950/82"
+                  } ${node.priority && isActive ? "ring-2 ring-white/35" : ""} ${isDimmed ? "opacity-25 grayscale" : "opacity-100"}`}
+                  style={{
+                    borderColor: `${node.color}66`,
+                    color: node.color,
+                    boxShadow: `0 14px 32px ${node.color}1f`,
+                    transform: `translate(-50%, -50%) scale(${node.scale})`,
+                  }}
+                  onMouseEnter={() => setHoveredGroup(node.groupId)}
+                  onMouseLeave={() => setHoveredGroup(null)}
+                >
+                  <span
+                    className="grid h-6 w-6 place-items-center rounded-full text-[10px] font-black text-white"
+                    style={{ backgroundColor: node.color }}
+                  >
+                    {node.short}
+                  </span>
+                  <span className="whitespace-nowrap">{node.name}</span>
+                </span>
+              );
+
+              return (
+                <div
+                  key={node.id}
+                  className="absolute"
+                  style={{
+                    left: `${node.x}%`,
+                    top: `${node.y}%`,
+                    zIndex: node.priority ? 80 : node.shade === "muted" ? 10 : 20 + index,
+                  }}
+                  title={`${node.groupTitle}${node.projects.length ? ` - ${node.projects.join(", ")}` : ""}`}
+                >
+                  {href ? (
+                    <Link href={href} aria-label={`${node.name} used in ${node.projects.join(", ")}`}>
+                      {chip}
+                    </Link>
+                  ) : (
+                    chip
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </ScrollReveal>
 
-        {/* Right Column: Evidence-based Skills list */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {skillGroups.map((group, idx) => {
-            const style = themeStyles[group.id];
-            return (
-              <ScrollReveal key={group.id} delay={idx * 60}>
-                <div className={`flex flex-col rounded-xl border bg-card/65 shadow-sm h-full overflow-hidden transition-all duration-200 hover:shadow-md ${style.border}`}>
-                  {/* Color strip accent */}
-                  <div className="h-0.5 w-full" style={{ backgroundColor: style.color }} />
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-slate-950/35 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/65 backdrop-blur-md">
+            Hover or filter skills to focus domains
+          </div>
+        </section>
+      </ScrollReveal>
 
-                  <div className="flex flex-col gap-3 p-4 flex-1">
-                    {/* Header */}
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: style.color }} />
-                      <h2 className={`text-xs font-bold font-mono tracking-wider uppercase ${style.text}`}>
-                        {group.title}
-                      </h2>
-                    </div>
-
-                    {/* Skills list */}
-                    <ul className="flex flex-col gap-2.5 flex-1">
-                      {group.items.map((item) => (
-                        <li key={item.name} className="flex flex-col gap-0.5">
-                          <span className="text-sm font-medium text-text-primary leading-snug">
-                            {item.name}
-                          </span>
-                          {item.projects.length > 0 ? (
-                            <div className="flex flex-wrap gap-1">
-                              {item.projects.map((proj) => (
-                                <Link
-                                  key={proj}
-                                  href={projectLinks[proj] ?? "/projects"}
-                                  className={`inline-flex items-center rounded px-1.5 py-0.5 text-[9px] font-mono font-medium border transition-colors ${style.border} ${style.bg} ${style.text} ${style.hoverBg}`}
-                                >
-                                  -&gt; {proj}
-                                </Link>
-                              ))}
-                            </div>
-                          ) : (
-                            <span className="text-[9px] font-mono text-text-muted">
-                              studied / practiced
-                            </span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
+      {selectedSkillGroup && (
+        <ScrollReveal delay={160}>
+          <section className="rounded-lg border border-border bg-card p-4 shadow-card">
+            <div className="flex flex-col gap-1">
+              <span className="section-eyebrow !mb-0">Focused domain</span>
+              <h2 className="font-display text-xl font-bold text-text-primary">{selectedSkillGroup.title}</h2>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {selectedSkillGroup.items.map((item) => (
+                <div key={item.name} className="rounded-lg border border-border bg-bg/40 p-3">
+                  <p className="text-sm font-semibold text-text-primary">{item.name}</p>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {item.projects.length > 0 ? (
+                      item.projects.map((project) => (
+                        <Link
+                          key={project}
+                          href={projectLinks[project] ?? "/projects"}
+                          className="rounded-md border border-accent/20 bg-accent/10 px-2 py-0.5 font-mono text-[10px] text-accent"
+                        >
+                          {project}
+                        </Link>
+                      ))
+                    ) : (
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-muted">
+                        Studied / practiced
+                      </span>
+                    )}
                   </div>
                 </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Footer note */}
-      <ScrollReveal>
-        <p className="text-center text-xs text-text-muted font-mono leading-relaxed max-w-2xl mx-auto pt-2 border-t border-border/60">
-          Project-linked skills link directly to their repositories and implementation descriptions on the Projects page.
-        </p>
-      </ScrollReveal>
+              ))}
+            </div>
+          </section>
+        </ScrollReveal>
+      )}
     </div>
   );
 }

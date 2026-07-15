@@ -7,7 +7,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function ProjectsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-10">
+    <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-7">
       <ScrollReveal>
         <SectionHeader
           eyebrow="Portfolio"
@@ -17,7 +17,7 @@ export default function ProjectsPage() {
         />
       </ScrollReveal>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {projects.map((project, idx) => (
           <ScrollReveal key={project.title} delay={idx * 120}>
             <ProjectCard project={project} />

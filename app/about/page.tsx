@@ -10,30 +10,41 @@ import { BookOpen, Trophy, ArrowRight, Terminal, Layers, Wrench } from "lucide-r
 const engineeringPillars = [
   {
     icon: Layers,
-    title: "Systems I like building",
+    title: "What I build",
     color: "#14b8a6",
     content:
       "Real-time collaborative tools (CRDT, WebSockets), NLP classifiers with hybrid neural architectures, and meeting transcription pipelines and vector search indexing. I'm drawn to problems where the architecture matters as much as the feature.",
   },
   {
     icon: Wrench,
-    title: "How I think about quality",
+    title: "How I engineer",
     color: "#a78bfa",
     content:
       "I write code as if the next person reading it is a stranger - modular functions, typed interfaces, and tests that document intent. In RecallAI I built robust queue-based transcript extractions and semantic vector queries. In CollabDocs I relied on Convex subscriptions instead of polling to keep state correct by design.",
   },
   {
     icon: Terminal,
-    title: "What I'm currently improving",
+    title: "What I am improving",
     color: "#f59e0b",
     content:
       "Distributed systems fundamentals (consensus, replication, CAP trade-offs), deeper ML deployment workflows (ONNX, model serving), and system design for high-traffic backends. Working through Designing Data-Intensive Applications and Stanford CS229 material.",
   },
 ];
 
+const storyBlocks = [
+  {
+    title: "Who I am",
+    body: "I am Shubham Bhardwaj, an MCA student at BIT Mesra building toward full-stack and AI engineering roles.",
+  },
+  {
+    title: "Why this matters",
+    body: "My goal is to build projects that prove I can reason about systems, not just assemble UI screens or call APIs.",
+  },
+];
+
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-10">
+    <div className="max-w-4xl mx-auto px-6 py-5 flex flex-col gap-7">
 
       {/* Page header */}
       <ScrollReveal>
@@ -44,27 +55,28 @@ export default function AboutPage() {
         />
       </ScrollReveal>
 
-      {/* Bio */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <ScrollReveal delay={100} className="md:col-span-2 flex flex-col gap-4">
-          <div className="flex flex-col gap-4 text-sm text-text-secondary leading-relaxed">
-            <p>
-              I'm <strong className="text-text-primary font-medium">Shubham Bhardwaj</strong>, a
-              graduate student at Birla Institute of Technology, Mesra (MCA). I focus on
-              full-stack web engineering and applied machine learning - specifically at the
-              intersection of backend systems and intelligent tooling.
-            </p>
-            <p>
-              My three main projects cover distinct technical domains: real-time collaboration
-              with CRDT and streaming AI (CollabDocs), NLP classification with a tribrid deep
-              neural network (SkimLit), and meeting intelligence with vector search (RecallAI).
-              Each one was built to actually understand the underlying system, not just use a library.
-            </p>
-            <p>
-              I write Python and TypeScript daily. My backend tooling includes FastAPI, Django,
-              and Convex. On the AI side, I work with TensorFlow, Scikit-learn, spaCy, and
-              LLM integrations via the Groq API.
-            </p>
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        <ScrollReveal delay={100} className="md:col-span-2">
+          <div className="grid h-full grid-cols-1 gap-4 sm:grid-cols-2">
+            {storyBlocks.map((block) => (
+              <Card key={block.title} className="flex flex-col gap-2">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                  {block.title}
+                </p>
+                <p className="text-sm leading-relaxed text-text-secondary">{block.body}</p>
+              </Card>
+            ))}
+            <Card className="flex flex-col gap-2 sm:col-span-2">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                Current technical focus
+              </p>
+              <p className="text-sm leading-relaxed text-text-secondary">
+                I write Python and TypeScript daily across FastAPI, Django, Next.js, TensorFlow,
+                Scikit-learn, spaCy, and LLM integrations. My projects are intentionally spread
+                across collaboration systems, NLP, and meeting intelligence so the architecture
+                problems are different in each one.
+              </p>
+            </Card>
           </div>
         </ScrollReveal>
 
@@ -90,13 +102,13 @@ export default function AboutPage() {
       </div>
 
       {/* Engineering pillars */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <ScrollReveal>
           <h2 className="text-xl font-bold font-display text-text-primary">
             Engineering perspective
           </h2>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {engineeringPillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
@@ -119,7 +131,7 @@ export default function AboutPage() {
       </div>
 
       {/* Education */}
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         <ScrollReveal>
           <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-accent" />
@@ -128,7 +140,7 @@ export default function AboutPage() {
         </ScrollReveal>
         <div className="flex flex-col gap-0 border-l-2 border-accent/30 pl-6 ml-2">
           {education.map((edu, idx) => (
-            <ScrollReveal key={edu.degree} delay={idx * 100} className="pb-6 last:pb-0">
+            <ScrollReveal key={edu.degree} delay={idx * 100} className="pb-5 last:pb-0">
               <Card className="!p-5">
                 <div className="flex flex-col gap-1.5">
                   <span className="text-[10px] font-mono tracking-wider text-text-muted uppercase">{edu.period}</span>
@@ -152,7 +164,7 @@ export default function AboutPage() {
       </div>
 
       {/* Achievements */}
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         <ScrollReveal>
           <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2">
             <Trophy className="w-4 h-4 text-yellow-500" />

@@ -66,6 +66,108 @@ export const projects = [
     github: "https://github.com/Shubham37204/RecallAI",
     accent: "#00d9ff",
     date: "Mar 2026"
+  },
+  {
+    title: "Hybrid Log Classifier",
+    tagline: "Three-stage log classification system with LLM fallback",
+    description: "Built a hybrid classifier that routes logs through deterministic regex rules, TF-IDF logistic regression, and Groq LLM fallback for ambiguous cases.",
+    problem: "Production logs are noisy and inconsistent - purely rule-based systems miss edge cases, while LLM-only classification is expensive and hard to control.",
+    details: [
+      "Designed a tiered classification pipeline using Regex first, TF-IDF + Logistic Regression second, and Groq LLM fallback only when confidence is low.",
+      "Built FastAPI routes and a Next.js interface for submitting logs, reviewing predictions, and inspecting classifier behavior.",
+      "Separated deterministic, statistical, and LLM stages so cost, latency, and explainability can be managed independently."
+    ],
+    tech: ["FastAPI", "Next.js", "Python", "Scikit-learn", "Groq AI", "TypeScript"],
+    tags: ["Hybrid AI", "Log Classification", "FastAPI", "ML Pipeline"],
+    impact: "Balances deterministic precision, ML coverage, and LLM flexibility for log triage.",
+    github: "https://github.com/Shubham37204/Hybrid-Log-Classifier",
+    accent: "#ef4444",
+    date: "Jun 2026"
+  },
+  {
+    title: "Study Assistant",
+    tagline: "Agentic RAG study assistant with hybrid search",
+    description: "Created an AI study assistant using retrieval, hybrid search, multi-agent orchestration, and grounded cited answers.",
+    problem: "Students need answers grounded in source material, not generic chatbot responses that hallucinate or lose context.",
+    details: [
+      "Implemented an agentic RAG pipeline with hybrid retrieval and cited response generation.",
+      "Used LangGraph-style orchestration patterns to separate retrieval, reasoning, and answer synthesis.",
+      "Designed the system around grounded answers so generated responses can be traced back to study material."
+    ],
+    tech: ["Python", "LangGraph", "RAG", "Hybrid Search", "LLM", "Vector Search"],
+    tags: ["Agentic RAG", "Hybrid Search", "Citations", "AI Assistant"],
+    impact: "Turns study material into cited, searchable, context-aware answers.",
+    github: "https://github.com/Shubham37204/Study-Assistant",
+    accent: "#8b5cf6",
+    date: "Jun 2026"
+  },
+  {
+    title: "PR Review Agent",
+    tagline: "AI-powered pull request review assistant",
+    description: "Built a PR review agent that analyzes GitHub pull request URLs and returns code-review feedback focused on scalability, security, and maintainability.",
+    problem: "Junior developers often miss architectural, security, and maintainability risks during review because they focus only on syntax or obvious bugs.",
+    details: [
+      "Created a review workflow that accepts a PR URL and generates senior-engineer-style feedback.",
+      "Structured findings around quality, scalability, security, and production-readiness concerns.",
+      "Optimized the interaction for fast review loops and actionable feedback."
+    ],
+    tech: ["TypeScript", "Next.js", "LLM", "GitHub", "Code Review"],
+    tags: ["Developer Tooling", "AI Review", "GitHub Workflow", "Code Quality"],
+    impact: "Automates first-pass PR review feedback for faster engineering iteration.",
+    github: "https://github.com/Shubham37204/Pr-Review-Agent",
+    accent: "#22c55e",
+    date: "May 2026"
+  },
+  {
+    title: "MyGit",
+    tagline: "Git clone built from scratch in Python",
+    description: "Implemented core Git internals from scratch, including object storage, branching, diffing, stash behavior, merge logic, and conflict detection.",
+    problem: "Git is often treated as a black box; rebuilding its internals forces a deeper understanding of content-addressed storage and version-control mechanics.",
+    details: [
+      "Implemented SHA1-based object storage and repository metadata primitives without external dependencies.",
+      "Built branch, diff, stash, and merge flows to understand how version-control operations work internally.",
+      "Added three-way merge and conflict detection to model real Git behavior."
+    ],
+    tech: ["Python", "SHA1", "CLI", "Version Control", "Algorithms"],
+    tags: ["Systems", "From Scratch", "CLI Tool", "Git Internals"],
+    impact: "Demonstrates low-level engineering depth beyond framework usage.",
+    github: "https://github.com/Shubham37204/MyGit",
+    accent: "#f97316",
+    date: "May 2026"
+  },
+  {
+    title: "Infograph AI",
+    tagline: "Resume-to-presentation workspace with ATS insights",
+    description: "Built an AI workspace that converts PDF resumes into recruiter-ready slide decks with ATS-focused insights and PDF export.",
+    problem: "Candidates struggle to convert dense resume content into recruiter-friendly visual summaries without losing important ATS-relevant signals.",
+    details: [
+      "Designed a PDF-to-presentation workflow that extracts resume content and restructures it into slide-ready sections.",
+      "Added ATS insight generation to identify recruiter-relevant strengths and gaps.",
+      "Supported export workflows so generated artifacts can be shared outside the app."
+    ],
+    tech: ["TypeScript", "Next.js", "PDF Processing", "LLM", "Presentation Export"],
+    tags: ["AI Workspace", "Resume Analysis", "PDF", "ATS"],
+    impact: "Transforms resume data into recruiter-facing visual artifacts.",
+    github: "https://github.com/Shubham37204/Infograph-AI",
+    accent: "#0ea5e9",
+    date: "May 2026"
+  },
+  {
+    title: "CLIPSeg Studio",
+    tagline: "Zero-shot image segmentation studio",
+    description: "Created a segmentation tool that isolates image regions using text prompts or visual scribbles with confidence refinement.",
+    problem: "Manual image masking is slow; zero-shot segmentation makes object isolation faster when users can describe what they want.",
+    details: [
+      "Integrated CLIPSeg-style zero-shot segmentation around text-prompt and scribble-driven selection workflows.",
+      "Built an interactive UI for refining object masks and confidence feedback.",
+      "Focused on a practical studio experience rather than a one-off model demo."
+    ],
+    tech: ["TypeScript", "Computer Vision", "CLIPSeg", "Image Segmentation", "UI"],
+    tags: ["Computer Vision", "Zero-shot", "Segmentation", "Interactive Tool"],
+    impact: "Turns natural-language object selection into an interactive image masking workflow.",
+    github: "https://github.com/Shubham37204/Clipseg",
+    accent: "#ec4899",
+    date: "May 2026"
   }
 ];
 

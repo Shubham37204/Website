@@ -24,11 +24,26 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
-  description: "Personal portfolio website of Shubham Bhardwaj, a passionate Full Stack & AI/ML Engineer specializing in collaborative platforms, scalable backend, and NLP pipelines.",
-  keywords: ["Shubham Bhardwaj", "Portfolio", "Full Stack Developer", "AI Engineer", "ML Engineer", "Next.js", "Python", "TensorFlow", "Ranchi"],
+  description:
+    "Personal portfolio website of Shubham Bhardwaj, a passionate Full Stack & AI/ML Engineer specializing in collaborative platforms, scalable backend, and NLP pipelines.",
+  icons: {
+    icon: "/Shubham.png",
+  },
+  keywords: [
+    "Shubham Bhardwaj",
+    "Portfolio",
+    "Full Stack Developer",
+    "AI Engineer",
+    "ML Engineer",
+    "Next.js",
+    "Python",
+    "TensorFlow",
+    "Ranchi",
+  ],
   openGraph: {
     title: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
-    description: "Personal portfolio website of Shubham Bhardwaj. Explore projects, credentials, and technical skills.",
+    description:
+      "Personal portfolio website of Shubham Bhardwaj. Explore projects, credentials, and technical skills.",
     type: "website",
     locale: "en_US",
   },
@@ -40,7 +55,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`} style={{ ["--font-comfortaa" as string]: "var(--font-display)" }}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`}
+      style={{ ["--font-comfortaa" as string]: "var(--font-display)" }}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -53,17 +72,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-bg text-text-primary selection:bg-accent selection:text-bg overflow-x-hidden min-h-screen flex flex-col justify-between">
-        {/* Single subtle background glow */}
-        <div className="glow-orb top-[-80px] right-[-80px] opacity-50" />
-
+      <body className="bg-bg text-text-primary selection:bg-accent selection:text-bg overflow-x-hidden min-h-screen flex flex-col">
         <div className="fixed inset-0 bg-dots opacity-25 pointer-events-none z-[1]" />
 
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-grow pt-28 pb-16">
-            {children}
-          </main>
+          <main className="flex-grow pt-24 pb-8">{children}</main>
           <Footer />
         </div>
       </body>

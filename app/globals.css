@@ -4,20 +4,22 @@
 
 /* --- Theme tokens ---------------------------------- */
 :root {
-  --bg: #f8f9fa;
-  --bg-card: #f1f3f5;
-  --bg-card-hover: #e9ecef;
-  --glass-bg: rgba(248, 249, 250, 0.88);
-  --border: rgba(0, 0, 0, 0.08);
+  --bg: #f7f7f2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f1ec;
+  --glass-bg: rgba(255, 255, 255, 0.86);
+  --border: rgba(22, 24, 20, 0.1);
 
-  --accent: #0d9488;
-  --accent-muted: rgba(13, 148, 136, 0.1);
-  --accent-glow: rgba(13, 148, 136, 0.2);
-  --accent-border: rgba(13, 148, 136, 0.22);
+  --accent: #e8552f;
+  --accent-2: #087ea4;
+  --accent-3: #6d8a2f;
+  --accent-muted: rgba(232, 85, 47, 0.09);
+  --accent-glow: rgba(232, 85, 47, 0.18);
+  --accent-border: rgba(232, 85, 47, 0.28);
 
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --text-muted: #9ca3af;
+  --text-primary: #171914;
+  --text-secondary: #56584f;
+  --text-muted: #8b8d83;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -33,20 +35,22 @@
 }
 
 html.dark {
-  --bg: #0a0a0b;
-  --bg-card: #141416;
-  --bg-card-hover: #1c1c1f;
-  --glass-bg: rgba(14, 14, 16, 0.82);
-  --border: rgba(255, 255, 255, 0.07);
+  --bg: #10110f;
+  --bg-card: #181a16;
+  --bg-card-hover: #20231d;
+  --glass-bg: rgba(20, 22, 18, 0.84);
+  --border: rgba(244, 241, 232, 0.1);
 
-  --accent: #14b8a6;
-  --accent-muted: rgba(20, 184, 166, 0.1);
-  --accent-glow: rgba(20, 184, 166, 0.22);
-  --accent-border: rgba(20, 184, 166, 0.2);
+  --accent: #ff7a45;
+  --accent-2: #4dd0e1;
+  --accent-3: #a3c95c;
+  --accent-muted: rgba(255, 122, 69, 0.1);
+  --accent-glow: rgba(255, 122, 69, 0.2);
+  --accent-border: rgba(255, 122, 69, 0.24);
 
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-primary: #f4f1e8;
+  --text-secondary: #b9b7ad;
+  --text-muted: #7e8176;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -72,7 +76,10 @@ html {
 }
 
 body {
-  background-color: var(--bg);
+  background:
+    linear-gradient(135deg, rgba(232, 85, 47, 0.045), transparent 26%),
+    linear-gradient(315deg, rgba(8, 126, 164, 0.055), transparent 28%),
+    var(--bg);
   color: var(--text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   text-rendering: optimizeLegibility;
@@ -91,11 +98,11 @@ body {
 
 /* --- Dot grid -------------------------------------- */
 .bg-dots {
-  background-image: radial-gradient(rgba(13, 148, 136, 0.05) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(23, 25, 20, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 html.dark .bg-dots {
-  background-image: radial-gradient(rgba(20, 184, 166, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(244, 241, 232, 0.07) 1px, transparent 1px);
 }
 
 /* --- Glass surface --------------------------------- */
@@ -104,20 +111,6 @@ html.dark .bg-dots {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border);
-}
-
-/* --- Glow orb -------------------------------------- */
-.glow-orb {
-  position: absolute;
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(circle, rgba(13, 148, 136, 0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(50px);
-}
-html.dark .glow-orb {
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
 }
 
 /* --- Float animation ------------------------------- */
@@ -147,11 +140,11 @@ html.dark .glow-orb {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-medium text-bg shadow-sm transition-all duration-200 hover:brightness-110 focus-ring;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-bold text-bg shadow-sm transition-all duration-200 hover:brightness-105 focus-ring;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-medium text-text-secondary transition-all duration-200 hover:bg-card-hover hover:text-text-primary focus-ring;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-text-secondary transition-all duration-200 hover:bg-card-hover hover:text-text-primary focus-ring;
   }
   .btn-secondary:hover {
     border-color: var(--accent-border);
@@ -162,7 +155,7 @@ html.dark .glow-orb {
   }
 
   .btn-pill-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 text-sm font-medium text-accent transition-all duration-200 hover:shadow-md focus-ring;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-accent transition-all duration-200 hover:shadow-md focus-ring;
     border: 1px solid var(--accent-border);
     background: var(--accent-muted);
   }
@@ -171,11 +164,11 @@ html.dark .glow-orb {
   }
 
   .btn-pill-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-8 py-3 text-sm font-medium text-text-secondary transition-all duration-200 hover:bg-card-hover hover:text-text-primary focus-ring;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-2.5 text-sm font-medium text-text-secondary transition-all duration-200 hover:bg-card-hover hover:text-text-primary focus-ring;
   }
 
   .card {
-    @apply rounded-xl border border-border bg-card p-6 shadow-card transition-all duration-200;
+    @apply rounded-lg border border-border bg-card p-5 shadow-card transition-all duration-200;
   }
 
   .card-hover {
@@ -186,23 +179,23 @@ html.dark .glow-orb {
   }
 
   .card-glass {
-    @apply rounded-xl border border-border glass p-6 shadow-card transition-all duration-200;
+    @apply rounded-lg border border-border glass p-5 shadow-card transition-all duration-200;
   }
 
   .badge {
-    @apply inline-flex items-center rounded-full border border-border bg-card-hover px-2 py-1 font-mono text-xs text-text-secondary;
+    @apply inline-flex items-center rounded-md border border-border bg-card-hover px-2 py-0.5 font-mono text-[11px] text-text-secondary;
   }
 
   .section-eyebrow {
-    @apply mb-2 font-mono text-xs uppercase tracking-[0.2em] text-text-muted;
+    @apply mb-1 font-mono text-[11px] uppercase tracking-[0.24em] text-accent;
   }
 
   .section-title {
-    @apply font-display text-3xl font-bold leading-tight text-text-primary md:text-4xl;
+    @apply font-display text-2xl font-bold leading-tight text-text-primary md:text-3xl;
   }
 
   .page-title {
-    @apply font-display text-4xl font-bold leading-tight text-text-primary md:text-5xl;
+    @apply font-display text-3xl font-bold leading-tight text-text-primary md:text-4xl;
   }
 
   .icon-btn {

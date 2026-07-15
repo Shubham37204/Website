@@ -6,9 +6,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full py-8 px-6 mt-16 relative z-10">
-      <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 text-center">
-        <div className="flex items-center gap-3">
+    <footer className="w-full px-6 pb-7 pt-4 relative z-10">
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 border-t border-border pt-5 text-center">
+        <div className="flex items-center gap-2.5">
           <IconButton
             href={personalData.github}
             external
@@ -31,12 +31,8 @@ export default function Footer() {
           </IconButton>
         </div>
 
-        <div className="w-full max-w-xs h-px bg-border" />
-
-        <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-text-muted">
+        <div className="flex flex-col sm:flex-row items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-text-muted">
           <span>&copy; {currentYear} {personalData.name}</span>
-          <span className="hidden sm:inline text-border">|</span>
-          <span>Built with Next.js &amp; Tailwind</span>
         </div>
       </div>
     </footer>

@@ -19,19 +19,25 @@ interface ProjectCardProps {
   };
 }
 
+const projectFlows: Record<string, string[]> = {
+  CollabDocs: ["Client editor", "Y.js CRDT", "Liveblocks", "Convex", "Groq stream"],
+  SkimLit: ["PubMed text", "Token model", "Char model", "Position features", "Label output"],
+  RecallAI: ["Audio upload", "Worker queue", "Transcript", "Embeddings", "Semantic search"],
+};
+
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="flex flex-col rounded-xl border border-border bg-card shadow-card transition-all duration-200 overflow-hidden hover:shadow-card-hover hover:[border-color:var(--accent-border)]">
+    <article className="flex flex-col rounded-lg border border-border bg-card shadow-card transition-all duration-200 overflow-hidden hover:shadow-card-hover hover:[border-color:var(--accent-border)]">
       {/* Accent top bar */}
       <div className="h-0.5 w-full flex-shrink-0" style={{ backgroundColor: project.accent }} />
 
-      <div className="flex flex-col gap-4 p-5 md:p-6 flex-1">
+      <div className="flex flex-col gap-3.5 p-4 md:p-5 flex-1">
 
         {/* Header row */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">{project.date}</span>
-            <h2 className="text-xl font-bold font-display text-text-primary leading-snug">{project.title}</h2>
+            <h2 className="text-lg font-bold font-display text-text-primary leading-snug">{project.title}</h2>
             <p className="text-sm font-medium text-text-secondary mt-0.5">{project.tagline}</p>
           </div>
           <a
@@ -66,6 +72,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
+        <div
+          className="grid grid-cols-1 gap-2 rounded-lg border p-3 sm:grid-cols-5"
+          style={{
+            borderColor: `${project.accent}28`,
+            background: `${project.accent}08`,
+          }}
+        >
+          {(projectFlows[project.title] ?? project.tech.slice(0, 5)).map((step, idx) => (
+            <div key={step} className="flex items-center gap-2 sm:flex-col sm:items-start">
+              <span
+                className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full font-mono text-[10px] font-bold text-bg"
+                style={{ backgroundColor: project.accent }}
+              >
+                {idx + 1}
+              </span>
+              <span className="text-xs font-medium leading-snug text-text-secondary">{step}</span>
+            </div>
+          ))}
+        </div>
+
         {/* Problem statement */}
         {project.problem && (
           <div className="flex flex-col gap-1.5">
@@ -93,7 +119,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Footer: stack + impact */}
-        <div className="flex flex-col gap-4 pt-4 border-t border-border mt-auto">
+        <div className="flex flex-col gap-3 pt-3 border-t border-border mt-auto">
           {/* Stack */}
           <div className="flex flex-col gap-2">
             <span className="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">Stack</span>
