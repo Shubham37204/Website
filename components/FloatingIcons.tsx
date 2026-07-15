@@ -160,15 +160,15 @@ export default function FloatingIcons() {
     },
     {
       name: "Convex",
-      color: "#f59e0b",
-      bgColor: "rgba(245, 158, 11, 0.05)",
-      borderColor: "rgba(245, 158, 11, 0.15)",
+      color: "#14b8a6",
+      bgColor: "rgba(20, 184, 166, 0.05)",
+      borderColor: "rgba(20, 184, 166, 0.15)",
       dur: "4.5s",
       delay: "3.2s",
       offsetX: -200,
       offsetY: -220,
       svg: (
-        <svg viewBox="0 0 24 24" fill="none" className="w-full h-full" stroke="#f59e0b" strokeWidth="1.5">
+        <svg viewBox="0 0 24 24" fill="none" className="w-full h-full" stroke="#14b8a6" strokeWidth="1.5">
           <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" />
           <path d="M12 22V12" />
           <path d="M22 7l-10 5L2 7" />

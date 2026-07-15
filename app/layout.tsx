@@ -7,7 +7,7 @@ import CustomCursor from "@/components/CustomCursor";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-comfortaa",
+  variable: "--font-display",
   weight: ["400", "500", "600", "700"],
 });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`} style={{ ["--font-comfortaa" as string]: "var(--font-display)" }}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -56,17 +56,21 @@ export default function RootLayout({
       </head>
       <body className="bg-bg text-text-primary selection:bg-accent selection:text-bg overflow-x-hidden min-h-screen flex flex-col justify-between">
         <CustomCursor />
-        {/* Futuristic Glowing Ambient Orbs */}
         <div className="glow-orb top-[-100px] left-[-100px]" />
-        <div className="glow-orb top-[40vh] right-[-100px]" style={{ background: "radial-gradient(circle, rgba(167, 139, 250, 0.06) 0%, transparent 70%)" }} />
-        <div className="glow-orb bottom-[-100px] left-[20vw]" style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%)" }} />
-        
-        {/* Dot pattern overlay */}
-        <div className="fixed inset-0 bg-dots opacity-30 pointer-events-none z-[1]" />
-        
+        <div
+          className="glow-orb top-[40vh] right-[-100px]"
+          style={{ background: "radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, transparent 70%)" }}
+        />
+        <div
+          className="glow-orb bottom-[-100px] left-[20vw]"
+          style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%)" }}
+        />
+
+        <div className="fixed inset-0 bg-dots opacity-25 pointer-events-none z-[1]" />
+
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-grow pt-24 pb-12">
+          <main className="flex-grow pt-28 pb-16">
             {children}
           </main>
           <Footer />

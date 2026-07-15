@@ -11,7 +11,10 @@ import {
   User,
   Menu,
   X,
+  Sun,
+  Moon,
 } from "lucide-react";
+import IconButton from "@/components/ui/IconButton";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -34,6 +37,17 @@ export default function Navbar() {
       setTheme("dark");
     }
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -62,105 +76,117 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-4xl">
-      <div className="relative rounded-2xl glass px-4 md:px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 border-accent/10">
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="text-lg md:text-xl font-bold font-comfortaa text-accent hover:text-amber-500 transition-colors tracking-wide flex items-center gap-1.5"
-        >
-          <span>shubham.dev</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-        </Link>
+    <>
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm animate-fade-in md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
-        {/* Desktop Navigation Links & Actions */}
-        <div className="hidden md:flex items-center gap-4">
-          <div className="flex items-center gap-1 font-mono text-xs tracking-wider">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-4xl">
+        <div className="relative rounded-xl glass px-4 md:px-6 py-3 flex items-center justify-between shadow-nav transition-all duration-250 border border-border">
+          <Link
+            href="/"
+            className="text-lg md:text-xl font-bold font-display text-accent hover:brightness-110 transition-all duration-200 tracking-tight flex items-center gap-2"
+          >
+            <span>shubham.dev</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          </Link>
+
+          <div className="hidden md:flex items-center gap-2">
+            <div className="flex items-center gap-1">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                      isActive
+                        ? "text-accent bg-accent/10"
+                        : "text-text-secondary hover:text-text-primary hover:bg-card"
+                    }`}
+                  >
+                    {isActive && (
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-accent" />
+                    )}
+                    {link.icon}
+                    <span className={isActive ? "pl-1" : ""}>{link.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="w-px h-5 bg-border mx-1" />
+
+            {mounted && (
+              <IconButton
+                onClick={toggleTheme}
+                label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-4 h-4" />
+                ) : (
+                  <Moon className="w-4 h-4" />
+                )}
+              </IconButton>
+            )}
+          </div>
+
+          <div className="flex md:hidden items-center gap-2">
+            {mounted && (
+              <IconButton
+                onClick={toggleTheme}
+                label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-4 h-4" />
+                ) : (
+                  <Moon className="w-4 h-4" />
+                )}
+              </IconButton>
+            )}
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="icon-btn"
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {mobileMenuOpen && (
+          <div className="absolute top-[calc(100%+8px)] left-0 right-0 glass rounded-xl p-2 flex flex-col gap-1 shadow-nav border border-border z-[99] md:hidden animate-slide-down">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-lg flex items-center gap-3 text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "bg-accent/10 text-accent font-semibold"
-                      : "text-text-secondary hover:text-accent"
+                      ? "bg-accent/10 text-accent"
+                      : "text-text-secondary hover:text-text-primary hover:bg-card"
                   }`}
                 >
                   {link.icon}
-                  <span>{link.name.toUpperCase()}</span>
+                  <span>{link.name}</span>
                 </Link>
               );
             })}
           </div>
-
-          {/* Divider */}
-          <div className="w-px h-4 bg-border" />
-
-          {/* Theme Toggle */}
-          {mounted && (
-            <button
-              onClick={toggleTheme}
-              className="px-2.5 py-1.5 rounded-lg border border-border/80 bg-card hover:bg-card-hover font-mono text-[10px] font-bold tracking-widest text-text-secondary hover:text-accent transition-colors duration-200"
-            >
-              {theme === "dark" ? "LIGHT" : "DARK"}
-            </button>
-          )}
-        </div>
-
-        {/* Mobile Actions */}
-        <div className="flex md:hidden items-center gap-3">
-          {/* Theme Toggle (Mobile) */}
-          {mounted && (
-            <button
-              onClick={toggleTheme}
-              className="px-2.5 py-1.5 rounded-lg border border-border/80 bg-card font-mono text-[9px] font-bold tracking-wider text-text-secondary hover:text-accent transition-colors"
-            >
-              {theme === "dark" ? "LIGHT" : "DARK"}
-            </button>
-          )}
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 rounded-lg text-text-primary hover:text-accent transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer (Glass overlay) */}
-      {mobileMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 glass rounded-2xl p-4 flex flex-col gap-2 shadow-2xl border-accent/15 z-[99] md:hidden animate-fade-in">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl flex items-center gap-3 transition-colors ${
-                  isActive
-                    ? "bg-accent/10 text-accent font-semibold"
-                    : "text-text-secondary hover:text-accent"
-                }`}
-              >
-                {link.icon}
-                <span className="font-mono text-xs tracking-wider uppercase">
-                  {link.name}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </nav>
+        )}
+      </nav>
+    </>
   );
 }

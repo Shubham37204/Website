@@ -10,9 +10,10 @@ export default function CustomCursor() {
   const [isHoveringClickable, setIsHoveringClickable] = useState(false);
 
   useEffect(() => {
-    // Hide cursor on touch devices
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isTouchDevice || prefersReducedMotion) return;
 
     setHidden(false);
 
@@ -32,7 +33,7 @@ export default function CustomCursor() {
         target.closest("button") ||
         target.style.cursor === "pointer" ||
         target.classList.contains("clickable");
-      
+
       setIsHoveringClickable(!!isClickable);
     };
 
@@ -49,15 +50,15 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Smooth trail effect
   useEffect(() => {
+    if (hidden) return;
+
     let animationFrameId: number;
-    
+
     const updateTrail = () => {
       setTrail((prev) => {
         const dx = position.x - prev.x;
         const dy = position.y - prev.y;
-        // Ease speed
         const ease = 0.15;
         return {
           x: prev.x + dx * ease,
@@ -69,36 +70,34 @@ export default function CustomCursor() {
 
     animationFrameId = requestAnimationFrame(updateTrail);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [position]);
+  }, [position, hidden]);
 
   if (hidden) return null;
 
   return (
     <>
-      {/* Outer Halo */}
       <div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[99999] transition-transform duration-75 mix-blend-screen"
+        className="fixed top-0 left-0 w-7 h-7 rounded-full pointer-events-none z-[99999] transition-transform duration-75 mix-blend-screen"
         style={{
-          transform: `translate3d(${trail.x - 16}px, ${trail.y - 16}px, 0) scale(${
-            clicked ? 0.8 : isHoveringClickable ? 1.5 : 1
+          transform: `translate3d(${trail.x - 14}px, ${trail.y - 14}px, 0) scale(${
+            clicked ? 0.8 : isHoveringClickable ? 1.4 : 1
           })`,
           border: isHoveringClickable
-            ? "1.5px solid rgba(245, 158, 11, 0.7)"
-            : "1px solid rgba(245, 158, 11, 0.25)",
+            ? "1.5px solid rgba(20, 184, 166, 0.7)"
+            : "1px solid rgba(20, 184, 166, 0.25)",
           backgroundColor: isHoveringClickable
-            ? "rgba(245, 158, 11, 0.05)"
+            ? "rgba(20, 184, 166, 0.05)"
             : "rgba(255, 255, 255, 0.01)",
           boxShadow: isHoveringClickable
-            ? "0 0 15px rgba(245, 158, 11, 0.2)"
+            ? "0 0 15px rgba(20, 184, 166, 0.2)"
             : "none",
         }}
       />
-      {/* Inner Dot */}
       <div
         className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full pointer-events-none z-[99999] bg-accent mix-blend-screen"
         style={{
           transform: `translate3d(${position.x - 3}px, ${position.y - 3}px, 0)`,
-          boxShadow: "0 0 8px #f59e0b",
+          boxShadow: "0 0 8px var(--accent)",
         }}
       />
     </>
