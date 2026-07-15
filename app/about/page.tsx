@@ -5,131 +5,141 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import { MapPin, Trophy, BookOpen, Heart, ArrowRight } from "lucide-react";
+import { BookOpen, Trophy, ArrowRight, Terminal, Layers, Wrench } from "lucide-react";
+
+const engineeringPillars = [
+  {
+    icon: Layers,
+    title: "Systems I like building",
+    color: "#14b8a6",
+    content:
+      "Real-time collaborative tools (CRDT, WebSockets), NLP classifiers with hybrid neural architectures, and low-level systems software like version control internals. I'm drawn to problems where the architecture matters as much as the feature.",
+  },
+  {
+    icon: Wrench,
+    title: "How I think about quality",
+    color: "#a78bfa",
+    content:
+      "I write code as if the next person reading it is a stranger — modular functions, typed interfaces, and tests that document intent. In MyGit I used 11 decoupled modules and full unit coverage for a 12-command CLI. In CollabDocs I relied on Convex subscriptions instead of polling to keep state correct by design.",
+  },
+  {
+    icon: Terminal,
+    title: "What I'm currently improving",
+    color: "#f59e0b",
+    content:
+      "Distributed systems fundamentals (consensus, replication, CAP trade-offs), deeper ML deployment workflows (ONNX, model serving), and system design for high-traffic backends. Working through Designing Data-Intensive Applications and Stanford CS229 material.",
+  },
+];
 
 export default function AboutPage() {
-  const values = [
-    {
-      title: "Growth mindset",
-      description: "Constantly expanding knowledge boundaries across frontend execution, advanced machine learning models, and backend performance systems.",
-      accent: "var(--accent)",
-    },
-    {
-      title: "Focused work",
-      description: "Prioritizing undisturbed engineering blocks to build high-integrity systems, clean state management, and clear APIs.",
-      accent: "#a78bfa",
-    },
-    {
-      title: "Craft & detail",
-      description: "Refining interfaces and refactoring algorithms to ensure long-term scalability, low-latency execution, and visually cohesive layouts.",
-      accent: "#22d3ee",
-    },
-  ];
-
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-12">
+    <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-14">
+
+      {/* Page header */}
       <ScrollReveal>
         <SectionHeader
           title="About me"
-          description="An insight into my core principles, education journey, and the motivations driving my technical pursuits."
+          description="How I think about engineering, what I'm working on, and the academic foundation behind it."
           titleClassName="page-title"
         />
       </ScrollReveal>
 
+      {/* Bio */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <ScrollReveal delay={100} className="md:col-span-2 flex flex-col gap-4">
-          <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2">
-            <Heart className="w-4 h-4 text-red-400" />
-            <span>Biography</span>
-          </h2>
           <div className="flex flex-col gap-4 text-sm text-text-secondary leading-relaxed">
             <p>
-              I am a software builder currently pursuing my Master of Computer Applications (MCA) at
-              <strong className="text-text-primary font-medium"> Birla Institute of Technology, Mesra</strong>. I focus on full-stack web applications and machine learning.
+              I'm <strong className="text-text-primary font-medium">Shubham Bhardwaj</strong>, a
+              graduate student at Birla Institute of Technology, Mesra (MCA). I focus on
+              full-stack web engineering and applied machine learning — specifically at the
+              intersection of backend systems and intelligent tooling.
             </p>
             <p>
-              I enjoy building tools that enable real-time collaboration, optimizing performance on the backend, and creating deep learning classifiers. I also like working on low-level challenges, such as writing a Git-compatible version control tool in Python from scratch.
+              My three main projects cover distinct technical domains: real-time collaboration
+              with CRDT and streaming AI (CollabDocs), NLP classification with a tribrid deep
+              neural network (SkimLit), and version control internals from the ground up (MyGit).
+              Each one was built to actually understand the underlying system, not just use a library.
             </p>
             <p>
-              My goal is always to write clean, maintainable code and design interfaces that are fast and intuitive to use.
+              I write Python and TypeScript daily. My backend tooling includes FastAPI, Django,
+              and Convex. On the AI side, I work with TensorFlow, Scikit-learn, spaCy, and
+              LLM integrations via the Groq API.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal delay={200}>
-          <Card glass className="flex flex-col justify-between gap-6 h-full">
-            <div className="flex flex-col gap-4">
-              <div className="flex justify-between items-center text-xs font-mono tracking-wider text-text-muted uppercase">
-                <span className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-accent" />
-                  Coordinates
-                </span>
-                <span>GMT+5:30</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold font-display text-text-primary mb-1">Ranchi, India</h3>
-                <p className="text-xs text-text-muted font-mono">{personalData.coordinates}</p>
-              </div>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                Coding and designing from Ranchi, Jharkhand, inside the green campus environment of BIT Mesra.
-              </p>
-            </div>
-
-            <div className="relative h-24 w-full bg-card-hover rounded-xl border border-border overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 bg-dots opacity-20 pointer-events-none" />
-              <div className="absolute w-2 h-2 bg-accent rounded-full" />
-            </div>
+          <Card className="flex flex-col gap-3 h-full">
+            <p className="text-text-muted text-xs font-mono tracking-wider uppercase">Quick facts</p>
+            <dl className="flex flex-col gap-2.5 text-sm">
+              {[
+                { label: "Location", value: personalData.location },
+                { label: "Timezone", value: "GMT +5:30 (IST)" },
+                { label: "Program", value: "MCA — BIT Mesra" },
+                { label: "Focus", value: "Full-Stack + AI Engineering" },
+                { label: "Status", value: "Open to internships / roles" },
+              ].map(({ label, value }) => (
+                <div key={label} className="flex flex-col gap-0.5">
+                  <dt className="text-[10px] font-mono text-text-muted uppercase tracking-wider">{label}</dt>
+                  <dd className="text-text-secondary font-medium text-xs">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </Card>
         </ScrollReveal>
       </div>
 
+      {/* Engineering pillars */}
       <div className="flex flex-col gap-6">
         <ScrollReveal>
-          <h2 className="text-xl font-bold font-display text-text-primary pb-2">
-            Philosophy &amp; values
+          <h2 className="text-xl font-bold font-display text-text-primary">
+            Engineering perspective
           </h2>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {values.map((val, idx) => (
-            <ScrollReveal key={val.title} delay={idx * 100}>
-              <Card accentTop={val.accent} className="flex flex-col gap-3 h-full">
-                <h3 className="text-sm font-bold font-display text-text-primary">
-                  {val.title}
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  {val.description}
-                </p>
-              </Card>
-            </ScrollReveal>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {engineeringPillars.map((pillar, idx) => {
+            const Icon = pillar.icon;
+            return (
+              <ScrollReveal key={pillar.title} delay={idx * 100}>
+                <Card accentTop={pillar.color} className="flex flex-col gap-3 h-full">
+                  <div className="flex items-center gap-2" style={{ color: pillar.color }}>
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    <h3 className="text-xs font-mono font-semibold uppercase tracking-wider">
+                      {pillar.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    {pillar.content}
+                  </p>
+                </Card>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
 
-      <div className="flex flex-col gap-6">
+      {/* Education */}
+      <div className="flex flex-col gap-5">
         <ScrollReveal>
-          <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2 pb-2">
+          <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-accent" />
-            <span>Academic foundations</span>
+            Education
           </h2>
         </ScrollReveal>
         <div className="flex flex-col gap-0 border-l-2 border-accent/30 pl-6 ml-2">
           {education.map((edu, idx) => (
-            <ScrollReveal
-              key={edu.degree}
-              delay={idx * 100}
-              className="pb-8 last:pb-0"
-            >
-              <Card className="!p-6">
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs font-mono tracking-wider text-text-muted uppercase">{edu.period}</span>
-                  <h3 className="text-base font-bold font-display text-text-primary">{edu.degree}</h3>
-                  <p className="text-sm text-text-secondary font-mono">
+            <ScrollReveal key={edu.degree} delay={idx * 100} className="pb-6 last:pb-0">
+              <Card className="!p-5">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[10px] font-mono tracking-wider text-text-muted uppercase">{edu.period}</span>
+                  <h3 className="text-sm font-bold font-display text-text-primary">{edu.degree}</h3>
+                  <p className="text-xs text-text-secondary font-mono">
                     {edu.institution} &bull; {edu.location}
                   </p>
-                  <ul className="flex flex-col gap-2 mt-2">
+                  <ul className="flex flex-col gap-1.5 mt-1.5">
                     {edu.bullets.map((bullet, bIdx) => (
-                      <li key={bIdx} className="text-sm text-text-secondary flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full mt-2 bg-accent flex-shrink-0" />
+                      <li key={bIdx} className="text-xs text-text-secondary flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full mt-1.5 bg-accent flex-shrink-0" />
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -141,11 +151,12 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6">
+      {/* Achievements */}
+      <div className="flex flex-col gap-5">
         <ScrollReveal>
-          <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2 pb-2">
+          <h2 className="text-xl font-bold font-display text-text-primary flex items-center gap-2">
             <Trophy className="w-4 h-4 text-yellow-500" />
-            <span>Achievements</span>
+            Achievements
           </h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 gap-4">

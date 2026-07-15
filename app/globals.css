@@ -91,11 +91,11 @@ body {
 
 /* ─── Dot grid ────────────────────────────────────── */
 .bg-dots {
-  background-image: radial-gradient(rgba(13, 148, 136, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(13, 148, 136, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 html.dark .bg-dots {
-  background-image: radial-gradient(rgba(20, 184, 166, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(20, 184, 166, 0.07) 1px, transparent 1px);
 }
 
 /* ─── Glass surface ───────────────────────────────── */

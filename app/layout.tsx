@@ -3,7 +3,6 @@ import { Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -55,16 +54,8 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-bg text-text-primary selection:bg-accent selection:text-bg overflow-x-hidden min-h-screen flex flex-col justify-between">
-        <CustomCursor />
-        <div className="glow-orb top-[-100px] left-[-100px]" />
-        <div
-          className="glow-orb top-[40vh] right-[-100px]"
-          style={{ background: "radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, transparent 70%)" }}
-        />
-        <div
-          className="glow-orb bottom-[-100px] left-[20vw]"
-          style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%)" }}
-        />
+        {/* Single subtle background glow */}
+        <div className="glow-orb top-[-80px] right-[-80px] opacity-50" />
 
         <div className="fixed inset-0 bg-dots opacity-25 pointer-events-none z-[1]" />
 

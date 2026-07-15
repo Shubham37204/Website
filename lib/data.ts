@@ -17,6 +17,7 @@ export const projects = [
     title: "CollabDocs",
     tagline: "Real-time Collaborative Editor with Streaming AI Assistant",
     description: "Architected a real-time collaborative document editor featuring conflict-free editing, live cursors, and an integrated Llama-3 inline writing assistant.",
+    problem: "Simultaneous editing causes conflicts without coordination — solved with CRDT-based merge semantics so edits never overwrite each other.",
     details: [
       "Engineered multi-user synchronization with Y.js CRDT and Liveblocks WebSockets for zero-latency cursor tracking.",
       "Integrated Groq AI (Llama 3) streaming API to power an inline editor with 6 preset writing assistant actions.",
@@ -24,15 +25,17 @@ export const projects = [
       "Implemented production features: automated version history with point-in-time restore, slash-command menus, table-of-contents with IntersectionObserver scroll-spy, and document exports to PDF and Markdown."
     ],
     tech: ["Next.js", "TypeScript", "Convex", "Liveblocks", "Y.js", "Clerk", "Groq AI", "Tailwind CSS"],
+    tags: ["Real-time Collaboration", "CRDT", "Streaming AI", "Serverless Backend"],
     impact: "Conflict-free simultaneous editing & rich AI document management",
     github: "https://github.com/Shubham37204/CollabDocs",
-    accent: "#f59e0b", // Amber
+    accent: "#f59e0b",
     date: "Apr 2026"
   },
   {
     title: "SkimLit",
     tagline: "Medical Abstract Classification NLP Pipeline",
     description: "Designed an end-to-end NLP classifier mapping PubMed randomized controlled trial abstracts into sequential roles using a high-performance deep hybrid network.",
+    problem: "Medical literature is dense — researchers spend hours manually parsing abstract structure that a trained model can classify in milliseconds.",
     details: [
       "Developed a Tribrid deep neural network combining token-level (Universal Sentence Encoder), character-level BiLSTM, and positional embeddings.",
       "Trained and compared classification models ranging from TF-IDF baselines through 1D CNNs to multi-input hybrid architectures.",
@@ -40,15 +43,17 @@ export const projects = [
       "Shipped a self-training Streamlit dashboard featuring automatic dataset downloading, modular training pipeline triggers, and live interactive text inference without requiring pre-trained weights at runtime."
     ],
     tech: ["TensorFlow", "spaCy", "Scikit-learn", "Streamlit", "Python", "NumPy", "Pandas"],
+    tags: ["NLP Pipeline", "Deep Learning", "Medical AI", "Multi-Input NN"],
     impact: "Classifies PubMed abstracts into 5 semantic roles automatically",
     github: "https://github.com/Shubham37204/SkimLit",
-    accent: "#a78bfa", // Purple
+    accent: "#a78bfa",
     date: "Feb 2026"
   },
   {
     title: "MyGit",
     tagline: "Git-Compatible Version Control System from Scratch",
     description: "Engineered a local version control system in pure Python implementing core content-addressable storage algorithms and branch management from the ground up.",
+    problem: "Understanding how Git actually works requires building one — implemented blob storage, three-way merge, and a 12-command CLI using only Python standard library.",
     details: [
       "Built a content-addressable blob storage system using SHA-1 hashing, implementing automatic deduplication and standard git object store layout.",
       "Created a staging area model and symbolic ref architecture with 11 decoupled modules using standard libraries.",
@@ -56,9 +61,10 @@ export const projects = [
       "Implemented a stash stack, unified color diffs, and an ASCII commit graph visualization on an interactive 12-command CLI with full unit-test coverage."
     ],
     tech: ["Python", "Standard Lib", "argparse", "hashlib", "difflib", "Unit Testing"],
+    tags: ["Version Control Internals", "Systems Programming", "CLI Tool", "Pure Python"],
     impact: "Pure standard library VCS, zero external dependencies",
     github: "https://github.com/Shubham37204/MyGit",
-    accent: "#00d9ff", // Cyan
+    accent: "#00d9ff",
     date: "Mar 2026"
   }
 ];
@@ -121,6 +127,78 @@ export const skills = {
     { name: "Vercel", level: 90 }
   ]
 };
+
+export const skillGroups = [
+  {
+    id: "frontend",
+    title: "Frontend Systems",
+    color: "#22d3ee",
+    items: [
+      { name: "Next.js", projects: ["CollabDocs"] },
+      { name: "React.js", projects: ["CollabDocs"] },
+      { name: "TypeScript", projects: ["CollabDocs"] },
+      { name: "Tailwind CSS", projects: ["CollabDocs"] },
+      { name: "HTML5 & CSS3", projects: [] },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend Engineering",
+    color: "#14b8a6",
+    items: [
+      { name: "FastAPI", projects: [] },
+      { name: "Django", projects: [] },
+      { name: "Convex (serverless)", projects: ["CollabDocs"] },
+      { name: "Clerk (auth)", projects: ["CollabDocs"] },
+      { name: "REST API design", projects: [] },
+    ],
+  },
+  {
+    id: "aiml",
+    title: "AI / ML Engineering",
+    color: "#a78bfa",
+    items: [
+      { name: "TensorFlow", projects: ["SkimLit"] },
+      { name: "Scikit-learn", projects: ["SkimLit"] },
+      { name: "spaCy", projects: ["SkimLit"] },
+      { name: "Groq AI / LLaMA 3", projects: ["CollabDocs"] },
+      { name: "NumPy & Pandas", projects: ["SkimLit"] },
+    ],
+  },
+  {
+    id: "data",
+    title: "Data & Storage",
+    color: "#fb7185",
+    items: [
+      { name: "PostgreSQL", projects: [] },
+      { name: "MongoDB", projects: [] },
+      { name: "Convex DB", projects: ["CollabDocs"] },
+    ],
+  },
+  {
+    id: "devops",
+    title: "Cloud / DevOps",
+    color: "#f59e0b",
+    items: [
+      { name: "Docker", projects: [] },
+      { name: "AWS (EC2, S3, RDS)", projects: [] },
+      { name: "Vercel", projects: ["CollabDocs"] },
+      { name: "Git & GitHub", projects: ["CollabDocs", "SkimLit", "MyGit"] },
+      { name: "Terraform", projects: [] },
+    ],
+  },
+  {
+    id: "tooling",
+    title: "Testing / Tooling",
+    color: "#34d399",
+    items: [
+      { name: "Unit Testing (Python)", projects: ["MyGit"] },
+      { name: "argparse / CLI design", projects: ["MyGit"] },
+      { name: "Streamlit dashboards", projects: ["SkimLit"] },
+      { name: "Kubernetes (basics)", projects: [] },
+    ],
+  },
+];
 
 export const achievements = [
   {
