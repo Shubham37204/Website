@@ -9,7 +9,7 @@ export const personalData = {
   coordinates: "23.3441 deg N, 85.3096 deg E",
   github: "https://github.com/Shubham37204",
   linkedin: "https://www.linkedin.com/in/shubham-bhardwaj-83028b212/",
-  resumeUrl: "https://drive.google.com/file/d/1J6IH3PFfcJzSOSS4skuro0sdkDwJyE_j/view?usp=drive_link",
+  resumeUrl: "https://drive.google.com/file/d/1CyFbges1vM_p4LpivicrtLbD-bvWtRkv/view?usp=sharing",
 };
 
 export const projects = [
