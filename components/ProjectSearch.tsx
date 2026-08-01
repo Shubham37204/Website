@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X, Filter } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 interface ProjectSearchProps {
   searchTerm: string;
@@ -18,8 +18,6 @@ const categories = [
   { id: "systems", label: "Systems & Tools" },
 ];
 
-const quickTechFilters = ["FastAPI", "Python", "Next.js", "CRDT", "TensorFlow", "Vector Search"];
-
 export default function ProjectSearch({
   searchTerm,
   onSearchChange,
@@ -29,7 +27,7 @@ export default function ProjectSearch({
   filteredCount,
 }: ProjectSearchProps) {
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col gap-3 w-full">
       {/* Category Pills & Search Input Row */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         {/* Category Pills */}
@@ -40,7 +38,7 @@ export default function ProjectSearch({
               <button
                 key={cat.id}
                 onClick={() => onCategoryChange(cat.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 whitespace-nowrap flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 whitespace-nowrap ${
                   isActive
                     ? "bg-accent text-bg font-semibold shadow-sm"
                     : "bg-card border border-border text-text-secondary hover:text-text-primary hover:bg-card-hover"
@@ -52,7 +50,7 @@ export default function ProjectSearch({
           })}
         </div>
 
-        {/* Search Input Box */}
+        {/* Search Input */}
         <div className="relative min-w-[260px] md:w-72">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
           <input
@@ -74,32 +72,11 @@ export default function ProjectSearch({
         </div>
       </div>
 
-      {/* Filter Quick Chips & Result Counter */}
-      <div className="flex items-center justify-between gap-3 pt-1 border-t border-border/50 text-[11px] font-mono text-text-muted">
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="flex items-center gap-1 text-text-secondary font-sans font-medium">
-            <Filter className="w-3 h-3 text-accent" /> Filter by stack:
-          </span>
-          {quickTechFilters.map((tech) => (
-            <button
-              key={tech}
-              onClick={() =>
-                onSearchChange(searchTerm.toLowerCase() === tech.toLowerCase() ? "" : tech)
-              }
-              className={`px-2 py-0.5 rounded border transition-all ${
-                searchTerm.toLowerCase() === tech.toLowerCase()
-                  ? "border-accent text-accent bg-accent/10"
-                  : "border-border/70 bg-bg hover:border-text-muted hover:text-text-primary"
-              }`}
-            >
-              {tech}
-            </button>
-          ))}
-        </div>
-
-        <span className="whitespace-nowrap ml-auto">
-          Showing <strong className="text-accent font-semibold">{filteredCount}</strong> of {totalCount} projects
-        </span>
+      {/* Result Counter */}
+      <div className="text-[11px] font-mono text-text-muted text-right">
+        Showing{" "}
+        <strong className="text-accent font-semibold">{filteredCount}</strong> of {totalCount}{" "}
+        projects
       </div>
     </div>
   );
