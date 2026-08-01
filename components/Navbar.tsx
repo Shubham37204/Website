@@ -9,34 +9,21 @@ import {
   ShieldAlert,
   Wrench,
   User,
+  Briefcase,
+  FileText,
   Menu,
   X,
   Sun,
   Moon,
 } from "lucide-react";
 import IconButton from "@/components/ui/IconButton";
+import { useTheme } from "@/components/ThemeProvider";
+import { personalData } from "@/lib/data";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "light") {
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-      setTheme("light");
-    } else {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-      setTheme("dark");
-    }
-  }, []);
+  const { theme, toggleTheme, mounted } = useTheme();
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -49,22 +36,17 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-
-    document.documentElement.classList.remove("dark", "light");
-    document.documentElement.classList.add(nextTheme);
-
-    localStorage.setItem("theme", nextTheme);
-    setTheme(nextTheme);
-  };
-
   const navLinks = [
     { name: "Home", href: "/", icon: <Home className="w-4 h-4" /> },
     {
       name: "Projects",
       href: "/projects",
       icon: <FolderGit2 className="w-4 h-4" />,
+    },
+    {
+      name: "Experience",
+      href: "/experience",
+      icon: <Briefcase className="w-4 h-4" />,
     },
     { name: "Skills", href: "/skills", icon: <Wrench className="w-4 h-4" /> },
     { name: "About", href: "/about", icon: <User className="w-4 h-4" /> },
@@ -85,8 +67,8 @@ export default function Navbar() {
         />
       )}
 
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-4xl">
-        <div className="relative rounded-xl glass px-4 md:px-6 py-3 flex items-center justify-between shadow-nav transition-all duration-250 border border-border">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-5xl">
+        <div className="relative rounded-xl glass px-4 md:px-5 py-2.5 flex items-center justify-between shadow-nav transition-all duration-250 border border-border">
           <Link
             href="/"
             className="text-lg md:text-xl font-bold font-display text-accent hover:brightness-110 transition-all duration-200 tracking-tight flex items-center gap-2"
@@ -103,7 +85,7 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                    className={`relative px-2.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
                       isActive
                         ? "text-accent bg-accent/10"
                         : "text-text-secondary hover:text-text-primary hover:bg-card"
@@ -113,13 +95,23 @@ export default function Navbar() {
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-accent" />
                     )}
                     {link.icon}
-                    <span className={isActive ? "pl-1" : ""}>{link.name}</span>
+                    <span className={isActive ? "pl-0.5" : ""}>{link.name}</span>
                   </Link>
                 );
               })}
             </div>
 
             <div className="w-px h-5 bg-border mx-1" />
+
+            <a
+              href={personalData.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent hover:text-bg transition-all duration-200 focus-ring"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Resume</span>
+            </a>
 
             {mounted && (
               <IconButton
@@ -136,6 +128,16 @@ export default function Navbar() {
           </div>
 
           <div className="flex md:hidden items-center gap-2">
+            <a
+              href={personalData.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-lg border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Resume</span>
+            </a>
+
             {mounted && (
               <IconButton
                 onClick={toggleTheme}
@@ -190,3 +192,4 @@ export default function Navbar() {
     </>
   );
 }
+

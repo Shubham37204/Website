@@ -3,6 +3,7 @@ import { Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -23,29 +24,44 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
+  title: {
+    default: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
+    template: "%s | Shubham Bhardwaj",
+  },
   description:
-    "Personal portfolio website of Shubham Bhardwaj, a passionate Full Stack & AI/ML Engineer specializing in collaborative platforms, scalable backend, and NLP pipelines.",
+    "Personal portfolio of Shubham Bhardwaj — Full Stack & AI/ML Engineer. MCA student at BIT Mesra building real-time collaborative systems, NLP pipelines, and backend services.",
   icons: {
     icon: "/Shubham.png",
   },
   keywords: [
     "Shubham Bhardwaj",
-    "Portfolio",
     "Full Stack Developer",
-    "AI Engineer",
-    "ML Engineer",
+    "AI/ML Engineer",
+    "BIT Mesra",
+    "CollabDocs",
+    "SkimLit",
+    "RecallAI",
     "Next.js",
+    "TypeScript",
+    "FastAPI",
     "Python",
     "TensorFlow",
-    "Ranchi",
   ],
+  authors: [{ name: "Shubham Bhardwaj", url: "https://github.com/Shubham37204" }],
+  creator: "Shubham Bhardwaj",
   openGraph: {
     title: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
     description:
-      "Personal portfolio website of Shubham Bhardwaj. Explore projects, credentials, and technical skills.",
+      "Full Stack & AI/ML Engineer. MCA student at BIT Mesra building real-time collaborative systems and NLP pipelines.",
     type: "website",
     locale: "en_US",
+    siteName: "Shubham Bhardwaj Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shubham Bhardwaj | Full Stack & AI/ML Engineer",
+    description:
+      "Full Stack & AI/ML Engineer building real-time collaborative platforms and applied ML products.",
   },
 };
 
@@ -59,6 +75,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`}
       style={{ ["--font-comfortaa" as string]: "var(--font-display)" }}
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -73,13 +90,15 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-bg text-text-primary selection:bg-accent selection:text-bg overflow-x-hidden min-h-screen flex flex-col">
-        <div className="fixed inset-0 bg-dots opacity-25 pointer-events-none z-[1]" />
+        <ThemeProvider>
+          <div className="fixed inset-0 bg-dots opacity-25 pointer-events-none z-[1]" />
 
-        <div className="relative z-10 flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-grow pt-24 pb-8">{children}</main>
-          <Footer />
-        </div>
+          <div className="relative z-10 flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow pt-24 pb-8">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

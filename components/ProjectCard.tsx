@@ -1,22 +1,12 @@
 "use client";
 
-import { Github, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { Github, ArrowUpRight, BookOpen, Star } from "lucide-react";
 import Badge from "@/components/ui/Badge";
+import { Project } from "@/lib/types";
 
 interface ProjectCardProps {
-  project: {
-    title: string;
-    tagline: string;
-    description: string;
-    problem?: string;
-    details: string[];
-    tech: string[];
-    tags?: string[];
-    impact: string;
-    github: string;
-    accent: string;
-    date: string;
-  };
+  project: Project;
 }
 
 const projectFlows: Record<string, string[]> = {
@@ -36,21 +26,37 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Header row */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">{project.date}</span>
-            <h2 className="text-lg font-bold font-display text-text-primary leading-snug">{project.title}</h2>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">{project.date}</span>
+              {project.isFlagship && (
+                <span className="inline-flex items-center gap-1 rounded bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 text-[9px] font-mono font-bold text-amber-500">
+                  <Star className="w-2.5 h-2.5 fill-amber-500" />
+                  FLAGSHIP
+                </span>
+              )}
+            </div>
+            <Link
+              href={`/projects/${project.slug}`}
+              className="text-lg font-bold font-display text-text-primary hover:text-accent transition-colors leading-snug"
+            >
+              {project.title}
+            </Link>
             <p className="text-sm font-medium text-text-secondary mt-0.5">{project.tagline}</p>
           </div>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${project.title} on GitHub`}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card-hover px-3 py-1.5 text-xs font-medium text-text-secondary hover:text-accent hover:[border-color:var(--accent-border)] transition-all duration-150 flex-shrink-0 focus-ring"
-          >
-            <Github className="w-3.5 h-3.5" />
-            Code
-            <ArrowUpRight className="w-3 h-3 opacity-60" />
-          </a>
+
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} on GitHub`}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card-hover px-2.5 py-1.5 text-xs font-medium text-text-secondary hover:text-accent hover:[border-color:var(--accent-border)] transition-all duration-150 focus-ring"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>Code</span>
+              <ArrowUpRight className="w-3 h-3 opacity-60" />
+            </a>
+          </div>
         </div>
 
         {/* Category tags */}
@@ -82,7 +88,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {(projectFlows[project.title] ?? project.tech.slice(0, 5)).map((step, idx) => (
             <div key={step} className="flex items-center gap-2 sm:flex-col sm:items-start">
               <span
-                className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full font-mono text-[10px] font-bold text-bg"
+                className="grid h-5 w-5 flex-shrink-0 place-items-center rounded-full font-mono text-[10px] font-bold text-bg"
                 style={{ backgroundColor: project.accent }}
               >
                 {idx + 1}
@@ -102,9 +108,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Architecture highlights */}
+        {/* Highlights */}
         <div className="flex flex-col gap-2">
-          <span className="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">Architecture &amp; highlights</span>
+          <span className="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">Highlights</span>
           <ul className="flex flex-col gap-2">
             {project.details.map((detail, idx) => (
               <li key={idx} className="text-sm text-text-secondary leading-relaxed flex items-start gap-2.5">
@@ -118,7 +124,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </ul>
         </div>
 
-        {/* Footer: stack + impact */}
+        {/* Footer: stack + impact + Case Study link */}
         <div className="flex flex-col gap-3 pt-3 border-t border-border mt-auto">
           {/* Stack */}
           <div className="flex flex-col gap-2">
@@ -130,17 +136,27 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </div>
           </div>
 
-          {/* Impact */}
-          <div
-            className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-mono"
-            style={{
-              background: `${project.accent}0d`,
-              border: `1px solid ${project.accent}30`,
-              color: project.accent,
-            }}
-          >
-            <span className="text-text-muted font-sans">Impact:</span>
-            <span className="font-medium">{project.impact}</span>
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            {/* Impact */}
+            <div
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-mono flex-1 min-w-[200px]"
+              style={{
+                background: `${project.accent}0d`,
+                border: `1px solid ${project.accent}30`,
+                color: project.accent,
+              }}
+            >
+              <span className="text-text-muted font-sans">Impact:</span>
+              <span className="font-medium truncate">{project.impact}</span>
+            </div>
+
+            <Link
+              href={`/projects/${project.slug}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-text-primary bg-card-hover border border-border hover:border-accent hover:text-accent transition-all ml-auto"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Case Study →</span>
+            </Link>
           </div>
         </div>
 

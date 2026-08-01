@@ -1,6 +1,6 @@
 "use client";
 
-import { personalData, projects } from "@/lib/data";
+import { personalData, flagshipProjects } from "@/lib/data";
 import ScrollReveal from "@/components/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -171,21 +171,23 @@ export default function HomePage() {
         </div>
       </ScrollReveal>
 
-      {/* -- Featured Projects ----------------------------- */}
+      {/* -- Flagship Projects ----------------------------- */}
       <section className="px-6 py-2 max-w-5xl mx-auto w-full">
         <ScrollReveal className="mb-5">
-          <SectionHeader eyebrow="Featured work" title="Projects" />
+          <SectionHeader
+            eyebrow="Flagship work"
+            title="Featured Projects"
+            description="Three in-depth engineering projects — click any card to read the full case study."
+          />
         </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {projects.slice(0, 3).map((project, idx) => (
-            <ScrollReveal key={project.title} delay={idx * 100}>
+          {flagshipProjects.map((project, idx) => (
+            <ScrollReveal key={project.slug} delay={idx * 100}>
               <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/projects/${project.slug}`}
                 className="block h-full group"
-                aria-label={`${project.title} on GitHub`}
+                aria-label={`${project.title} case study`}
               >
                 <Card hover className="h-full flex flex-col gap-3 !p-4">
                   {/* Accent bar */}
@@ -198,7 +200,7 @@ export default function HomePage() {
                       background: `${project.accent}08`,
                     }}
                   >
-                    {(projectVisuals[project.title] ?? project.tags?.slice(0, 3) ?? project.tech.slice(0, 3)).map((item) => (
+                    {(projectVisuals[project.title] ?? project.tags.slice(0, 3)).map((item) => (
                       <span
                         key={item}
                         className="rounded-md border bg-card/75 px-2 py-2 text-center font-mono text-[10px] font-semibold text-text-secondary"
@@ -212,7 +214,7 @@ export default function HomePage() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex flex-col gap-0.5">
                       <span className="text-[10px] font-mono tracking-wider text-text-muted uppercase">{project.date}</span>
-                      <h3 className="text-text-primary font-semibold text-base leading-snug">
+                      <h3 className="text-text-primary font-semibold text-base leading-snug group-hover:text-accent transition-colors">
                         {project.title}
                       </h3>
                     </div>
@@ -228,7 +230,7 @@ export default function HomePage() {
                       <span className="font-mono uppercase tracking-[0.14em] text-text-muted">
                         Architecture
                       </span>
-                      <p className="mt-1 line-clamp-2 text-text-secondary">{project.tags?.[0] ?? project.tech[0]}</p>
+                      <p className="mt-1 line-clamp-2 text-text-secondary">{project.tags[0]}</p>
                     </div>
                     <div className="rounded-md border border-border bg-bg/40 p-2">
                       <span className="font-mono uppercase tracking-[0.14em] text-text-muted">
