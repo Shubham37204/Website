@@ -3,6 +3,9 @@ import { Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TerminalModal from "@/components/TerminalModal";
+import CommandMenu from "@/components/CommandMenu";
+import RecruiterModal from "@/components/RecruiterModal";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const spaceGrotesk = Space_Grotesk({
@@ -98,6 +101,9 @@ export default function RootLayout({
             <main className="flex-grow pt-24 pb-8">{children}</main>
             <Footer />
           </div>
+          <TerminalModal />
+          <CommandMenu />
+          <RecruiterModal />
         </ThemeProvider>
       </body>
     </html>

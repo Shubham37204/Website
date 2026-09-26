@@ -4,28 +4,28 @@
 
 /* --- Theme tokens ---------------------------------- */
 :root {
-  --bg: #f7f7f2;
+  --bg: #f8fafc;
   --bg-card: #ffffff;
-  --bg-card-hover: #f0f1ec;
-  --glass-bg: rgba(255, 255, 255, 0.86);
-  --border: rgba(22, 24, 20, 0.1);
+  --bg-card-hover: #f1f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --border: rgba(99, 102, 241, 0.14);
 
-  --accent: #e8552f;
-  --accent-2: #087ea4;
-  --accent-3: #6d8a2f;
-  --accent-muted: rgba(232, 85, 47, 0.09);
-  --accent-glow: rgba(232, 85, 47, 0.18);
-  --accent-border: rgba(232, 85, 47, 0.28);
+  --accent: #4f46e5;
+  --accent-2: #0284c7;
+  --accent-3: #059669;
+  --accent-muted: rgba(79, 70, 229, 0.08);
+  --accent-glow: rgba(79, 70, 229, 0.22);
+  --accent-border: rgba(79, 70, 229, 0.3);
 
-  --text-primary: #171914;
-  --text-secondary: #56584f;
-  --text-muted: #8b8d83;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-nav: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 1px 2px rgba(79, 70, 229, 0.05);
+  --shadow-md: 0 4px 14px rgba(79, 70, 229, 0.08);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 12px 30px rgba(79, 70, 229, 0.12);
+  --shadow-nav: 0 4px 24px rgba(79, 70, 229, 0.08);
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -35,28 +35,28 @@
 }
 
 html.dark {
-  --bg: #10110f;
-  --bg-card: #181a16;
-  --bg-card-hover: #20231d;
-  --glass-bg: rgba(20, 22, 18, 0.84);
-  --border: rgba(244, 241, 232, 0.1);
+  --bg: #07090e;
+  --bg-card: #0f172a;
+  --bg-card-hover: #1e293b;
+  --glass-bg: rgba(15, 23, 42, 0.88);
+  --border: rgba(99, 102, 241, 0.22);
 
-  --accent: #ff7a45;
-  --accent-2: #4dd0e1;
-  --accent-3: #a3c95c;
-  --accent-muted: rgba(255, 122, 69, 0.1);
-  --accent-glow: rgba(255, 122, 69, 0.2);
-  --accent-border: rgba(255, 122, 69, 0.24);
+  --accent: #818cf8;
+  --accent-2: #38bdf8;
+  --accent-3: #34d399;
+  --accent-muted: rgba(129, 140, 248, 0.12);
+  --accent-glow: rgba(129, 140, 248, 0.28);
+  --accent-border: rgba(129, 140, 248, 0.35);
 
-  --text-primary: #f4f1e8;
-  --text-secondary: #b9b7ad;
-  --text-muted: #7e8176;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.25);
-  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-nav: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 12px 32px rgba(129, 140, 248, 0.2);
+  --shadow-nav: 0 4px 28px rgba(0, 0, 0, 0.6);
 
   color-scheme: dark;
 }
@@ -77,8 +77,8 @@ html {
 
 body {
   background:
-    linear-gradient(135deg, rgba(232, 85, 47, 0.045), transparent 26%),
-    linear-gradient(315deg, rgba(8, 126, 164, 0.055), transparent 28%),
+    radial-gradient(ellipse at 15% 10%, rgba(99, 102, 241, 0.12), transparent 45%),
+    radial-gradient(ellipse at 85% 90%, rgba(56, 189, 248, 0.10), transparent 45%),
     var(--bg);
   color: var(--text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;

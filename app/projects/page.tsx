@@ -48,12 +48,26 @@ export default function ProjectsPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-7">
       <ScrollReveal>
-        <SectionHeader
-          eyebrow="Portfolio & Systems"
-          title="Projects"
-          description="Explore real-time collaborative editors, medical NLP pipelines, speech-to-text RAG tools, and systems software built with Next.js, Python, and TensorFlow."
-          titleClassName="page-title"
-        />
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-border pb-6">
+          <SectionHeader
+            eyebrow="Portfolio & Systems"
+            title="Projects"
+            description="Explore real-time collaborative editors, medical NLP pipelines, speech-to-text RAG tools, and systems software built with Next.js, Python, and TensorFlow."
+            titleClassName="page-title"
+          />
+          <div className="flex items-center gap-3 self-stretch sm:self-auto flex-shrink-0">
+            <div className="rounded-xl border border-accent/20 bg-card p-3 text-center min-w-[90px] shadow-sm">
+              <span className="block font-display text-xl font-bold text-accent">{projects.length}</span>
+              <span className="text-[10px] font-mono text-text-muted uppercase">Projects</span>
+            </div>
+            <div className="rounded-xl border border-amber-500/20 bg-card p-3 text-center min-w-[90px] shadow-sm">
+              <span className="block font-display text-xl font-bold text-amber-500">
+                {projects.filter((p) => p.isFlagship).length}
+              </span>
+              <span className="text-[10px] font-mono text-text-muted uppercase">Flagship</span>
+            </div>
+          </div>
+        </div>
       </ScrollReveal>
 
       {/* Multi-Field Search & Filter Controls */}

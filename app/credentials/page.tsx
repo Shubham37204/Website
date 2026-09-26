@@ -45,32 +45,33 @@ export default function CredentialsPage() {
 
       <ScrollReveal delay={80}>
         <section className="grid gap-5 md:grid-cols-[0.85fr_1.15fr]">
-          <div className="rounded-lg border border-accent/25 bg-accent/[0.06] p-5">
+          <div className="rounded-2xl border border-accent/30 bg-accent/[0.08] p-6 shadow-card hover:shadow-card-hover transition-all relative overflow-hidden group">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-accent/20 rounded-full blur-2xl pointer-events-none group-hover:bg-accent/30 transition-all" />
+
             <div className="flex items-center gap-2 text-accent">
               <Award className="h-5 w-5" />
               <span className="font-mono text-xs font-bold uppercase tracking-[0.2em]">
-                Specialization
+                Google Specialization
               </span>
             </div>
 
-            <h2 className="mt-4 font-display text-2xl font-bold leading-tight text-text-primary">
+            <h2 className="mt-3 font-display text-2xl font-bold leading-tight text-text-primary">
               {featuredCert.title}
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-              Strongest credential signal on this page: a complete automation track covering
-              Python scripting, shell workflows, Git, cloud configuration, and production-style
-              troubleshooting.
+            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-text-secondary">
+              Official Google automation specialization covering Python scripting, system configuration,
+              Git/GitHub automation, cloud infrastructure, and real-world debugging techniques.
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              <Badge color="#e8552f">{featuredCert.issuer}</Badge>
-              <Badge color="#087ea4">{featuredCert.date}</Badge>
-              <Badge color="#6d8a2f">PDF available</Badge>
+              <Badge color="#6366f1">{featuredCert.issuer}</Badge>
+              <Badge color="#06b6d4">{featuredCert.date}</Badge>
+              <Badge color="#10b981">Verified Certificate</Badge>
             </div>
 
             <div className="mt-5 flex flex-wrap gap-2">
               <Button variant="primary" href={featuredCert.pdf}>
-                Open PDF
+                View Certificate PDF
                 <Download className="h-4 w-4" />
               </Button>
             </div>
@@ -111,37 +112,50 @@ export default function CredentialsPage() {
                   </h3>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {group.items.map((cert) => (
-                      <article key={cert.id} className="group flex h-full flex-col justify-between gap-4 rounded-lg border border-border bg-card p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-card-hover">
+                      <article key={cert.id} className="group flex h-full flex-col justify-between gap-4 rounded-xl border border-border bg-card p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-card-hover relative overflow-hidden">
                         <div className="flex flex-col gap-3">
                           <div className="flex items-center justify-between gap-3">
-                            <Badge color="#6d8a2f">{cert.issuer}</Badge>
+                            <span className="inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2 py-0.5 font-mono text-[10px] font-bold text-indigo-400">
+                              <CheckCircle2 className="h-3 w-3" />
+                              {cert.issuer} Verified
+                            </span>
                             <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted">
-                              <Calendar className="h-3 w-3" />
+                              <Calendar className="h-3 w-3 text-accent" />
                               {cert.date}
                             </span>
                           </div>
 
-                          <h4 className="font-display text-base font-bold leading-snug text-text-primary">
+                          <h4 className="font-display text-base font-bold leading-snug text-text-primary group-hover:text-accent transition-colors">
                             {cert.title}
                           </h4>
 
-                          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted">
-                            Credential ID: {cert.id}
+                          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-muted">
+                            Credential ID: <span className="text-text-secondary font-bold">{cert.id}</span>
                           </p>
 
-                          <span className="inline-flex w-fit items-center gap-1.5 rounded-md border border-border bg-bg/50 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-text-muted">
-                            <FileText className="h-3 w-3" />
-                            PDF included
-                          </span>
+                          {cert.url && (
+                            <a
+                              href={cert.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-[11px] text-accent hover:underline font-mono"
+                            >
+                              Verify on Coursera &rarr;
+                            </a>
+                          )}
                         </div>
 
-                        <div className="flex items-center gap-2 border-t border-border pt-3">
+                        <div className="flex items-center justify-between gap-2 border-t border-border pt-3 mt-auto">
+                          <span className="inline-flex items-center gap-1 font-mono text-[10px] text-text-muted">
+                            <FileText className="h-3.5 w-3.5 text-accent" />
+                            PDF Document
+                          </span>
                           <a
                             href={cert.pdf}
                             download
-                            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:bg-card-hover hover:text-accent focus-ring"
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent hover:text-bg transition-all"
                           >
-                            Open PDF
+                            <span>Download PDF</span>
                             <Download className="h-3.5 w-3.5" />
                           </a>
                         </div>

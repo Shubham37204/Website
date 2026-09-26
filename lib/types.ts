@@ -29,6 +29,12 @@ export interface CaseStudy {
   }[];
   results: ProjectMetric[];
   lessonsLearned: string[];
+  snippets?: {
+    filename: string;
+    language: string;
+    code: string;
+    description: string;
+  }[];
 }
 
 export interface Project {
@@ -46,6 +52,8 @@ export interface Project {
   impact: string;
   github: string;
   liveUrl?: string;
+  image?: string;
+  demoVideo?: string;
   accent: string;
   date: string;
   caseStudy?: CaseStudy;

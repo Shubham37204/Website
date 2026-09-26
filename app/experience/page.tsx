@@ -12,14 +12,14 @@ const statCards = [
     label: "Current Status",
     value: "MCA Student",
     detail: "Birla Institute of Technology, Mesra",
-    accent: "#087ea4",
+    accent: "#6366f1",
   },
   {
     icon: Briefcase,
     label: "Open To",
     value: "Internships & Roles",
     detail: "Full-Stack / AI/ML / Backend",
-    accent: "#22c55e",
+    accent: "#10b981",
   },
   {
     icon: MapPin,

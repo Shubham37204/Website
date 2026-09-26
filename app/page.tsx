@@ -17,14 +17,19 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-const credibilityPills = [
-  { label: "Next.js / TypeScript", color: "#087ea4" },
-  { label: "Python / FastAPI / Django", color: "#e8552f" },
-  { label: "AI/ML / TensorFlow", color: "#6d8a2f" },
-  { label: "Cloud / Docker / AWS", color: "#b45309" },
+const coreTech = [
+  { label: "Next.js / TypeScript", color: "#6366f1" },
+  { label: "Python / FastAPI / Django", color: "#06b6d4" },
+  { label: "AI/ML / TensorFlow", color: "#10b981" },
+  { label: "Cloud / Docker / PostgreSQL", color: "#f59e0b" },
 ];
 
-const workflowSteps = ["IDEA", "PLAN", "BUILD", "REVIEW", "SHIP"];
+const focusAreas = [
+  "Real-Time Collaborative Systems",
+  "Applied Machine Learning Pipelines",
+  "Async Architecture & Queue Systems",
+  "Production Backends",
+];
 
 const identityFacts = [
   { label: "Profile", value: personalData.title, icon: BriefcaseBusiness },
@@ -38,11 +43,11 @@ const projectVisuals: Record<string, string[]> = {
   RecallAI: ["Audio", "Queue", "Search"],
 };
 
-const proofSignals = [
-  "Real-time collaboration with CRDT sync",
-  "NLP model pipeline with multi-input training",
-  "Meeting intelligence with queues and semantic search",
-  "Verified Google automation credentials",
+const keyCapabilities = [
+  "Real-time multi-user document collaboration with Y.js CRDT synchronization",
+  "Multi-input medical NLP classification model trained on PubMed RCT datasets",
+  "Asynchronous meeting transcription processing with Redis task queues & semantic search",
+  "Production backend implementations with automated testing and containerized deployments",
 ];
 
 export default function HomePage() {
@@ -50,36 +55,42 @@ export default function HomePage() {
     <div className="w-full flex flex-col gap-8">
 
       {/* -- Hero ------------------------------------------- */}
-      <section className="relative min-h-[48vh] md:min-h-[54vh] flex items-center justify-center overflow-hidden px-6 py-6">
-        {/* Subtle background dot grid inherited from layout */}
-        <div className="relative z-10 max-w-4xl mx-auto grid items-center gap-6 px-4 md:grid-cols-[1.2fr_0.8fr]">
-          <div className="flex flex-col items-center gap-5 text-center md:items-start md:text-left">
+      <section className="relative min-h-[50vh] md:min-h-[56vh] flex items-center justify-center overflow-hidden px-6 py-8">
+        <div className="relative z-10 max-w-5xl mx-auto grid items-center gap-8 px-2 md:grid-cols-[1.25fr_0.75fr]">
+          <div className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
 
           <ScrollReveal delay={50}>
-            <span className="section-eyebrow">Open to internships / roles</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-mono font-semibold text-accent shadow-sm backdrop-blur">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+              </span>
+              <span>Available for Internship &amp; Full-Time Engineering Roles</span>
+            </div>
           </ScrollReveal>
 
           <ScrollReveal delay={150}>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight text-text-primary">
               Building{" "}
-              <span className="text-accent">collaborative systems</span>,{" "}
-              backend platforms, and{" "}
-              <span style={{ color: "var(--accent-2)" }}>applied ML products</span>.
+              <span className="bg-gradient-to-r from-accent via-indigo-400 to-accent-2 bg-clip-text text-transparent">
+                collaborative systems
+              </span>
+              , backends, and{" "}
+              <span className="text-accent-2">applied ML models</span>.
             </h1>
           </ScrollReveal>
 
           <ScrollReveal delay={250}>
             <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-xl">
-              Graduate student at BIT Mesra. I build real-time web apps,
-              NLP pipelines, and systems software - with a focus on
-              correctness, clean architecture, and proof-of-work projects.
+              MCA Student at BIT Mesra. Architecting real-time multi-user web applications,
+              asynchronous backend platforms, and medical NLP model pipelines.
             </p>
           </ScrollReveal>
 
           {/* CTA row */}
           <ScrollReveal delay={350} className="flex flex-wrap justify-center gap-3 md:justify-start">
             <Button variant="primary" href="/projects">
-              View Projects
+              Explore Projects
               <ArrowRight className="w-4 h-4" />
             </Button>
             <Button variant="secondary" href={personalData.github} external>
@@ -92,14 +103,14 @@ export default function HomePage() {
             </Button>
           </ScrollReveal>
 
-          {/* Credibility tech row */}
+          {/* Tech stack row */}
           <ScrollReveal delay={450} className="flex flex-wrap justify-center gap-2 md:justify-start">
-            {credibilityPills.map((pill) => (
+            {coreTech.map((pill) => (
               <span
                 key={pill.label}
-                className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-mono font-medium"
+                className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-mono font-medium shadow-sm backdrop-blur transition-transform hover:scale-105"
                 style={{
-                  borderColor: `${pill.color}40`,
+                  borderColor: `${pill.color}44`,
                   color: pill.color,
                   background: `${pill.color}0d`,
                 }}
@@ -112,30 +123,37 @@ export default function HomePage() {
           </div>
 
           <ScrollReveal delay={220}>
-            <aside className="mx-auto w-full max-w-sm rounded-lg border border-border bg-card/80 p-4 text-left shadow-card">
-              <div className="flex flex-col gap-1 border-b border-border pb-3">
-                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
-                  Identity
-                </span>
-                <h2 className="font-display text-2xl font-bold text-text-primary">
+            <aside className="mx-auto w-full max-w-sm rounded-2xl border border-accent/20 bg-card/85 p-5 text-left shadow-card-hover backdrop-blur relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-2xl pointer-events-none group-hover:bg-accent/20 transition-all" />
+
+              <div className="flex flex-col gap-1 border-b border-border pb-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent font-bold">
+                    Identity &bull; BIT Mesra
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 font-semibold">
+                    MCA Student
+                  </span>
+                </div>
+                <h2 className="font-display text-2xl font-bold text-text-primary mt-1">
                   {personalData.name}
                 </h2>
-                <p className="text-sm text-text-secondary">
-                  Full-stack builder focused on AI-backed product systems.
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  Full-stack developer building real-time collaboration engines and applied AI systems.
                 </p>
               </div>
 
-              <div className="mt-3 flex flex-col gap-3">
+              <div className="mt-4 flex flex-col gap-3">
                 {identityFacts.map(({ label, value, icon: Icon }) => (
                   <div key={label} className="flex items-start gap-3">
-                    <span className="mt-0.5 grid h-8 w-8 place-items-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
+                    <span className="mt-0.5 grid h-8 w-8 place-items-center rounded-xl border border-accent/25 bg-accent/10 text-accent flex-shrink-0">
                       <Icon className="h-4 w-4" />
                     </span>
                     <div className="min-w-0">
                       <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted">
                         {label}
                       </p>
-                      <p className="truncate text-sm font-medium text-text-primary">{value}</p>
+                      <p className="truncate text-xs font-semibold text-text-primary">{value}</p>
                     </div>
                   </div>
                 ))}
@@ -146,14 +164,14 @@ export default function HomePage() {
       </section>
 
       <ScrollReveal className="mx-auto w-full max-w-5xl px-6">
-        <div className="grid grid-cols-2 overflow-hidden rounded-lg border border-border bg-card/80 shadow-card sm:grid-cols-5">
-          {workflowSteps.map((step, idx) => (
+        <div className="grid grid-cols-2 overflow-hidden rounded-lg border border-border bg-card/80 shadow-card sm:grid-cols-4">
+          {focusAreas.map((area, idx) => (
             <div
-              key={step}
-              className="flex items-center justify-center gap-2 border-b border-r border-border px-3 py-3 last:border-r-0 sm:border-b-0"
+              key={area}
+              className="flex items-center justify-center gap-2 border-b border-r border-border px-3 py-3 last:border-r-0 sm:border-b-0 text-center"
             >
               <span
-                className="h-2 w-2 rounded-full"
+                className="h-2 w-2 rounded-full flex-shrink-0"
                 style={{
                   backgroundColor:
                     idx % 3 === 0
@@ -163,8 +181,8 @@ export default function HomePage() {
                         : "var(--accent-3)",
                 }}
               />
-              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-text-secondary">
-                {step}
+              <span className="font-mono text-[11px] font-semibold tracking-wide text-text-secondary">
+                {area}
               </span>
             </div>
           ))}
@@ -175,9 +193,9 @@ export default function HomePage() {
       <section className="px-6 py-2 max-w-5xl mx-auto w-full">
         <ScrollReveal className="mb-5">
           <SectionHeader
-            eyebrow="Flagship work"
-            title="Featured Projects"
-            description="Three in-depth engineering projects — click any card to read the full case study."
+            eyebrow="Key Projects"
+            title="Featured Engineering Work"
+            description="Deep-dive case studies into real-time CRDT editors, NLP classification, and asynchronous task architectures."
           />
         </ScrollReveal>
 
@@ -261,12 +279,12 @@ export default function HomePage() {
 
       <section className="mx-auto w-full max-w-5xl px-6 py-2">
         <ScrollReveal className="mb-5">
-          <SectionHeader eyebrow="Proof signals" title="Engineering evidence" />
+          <SectionHeader eyebrow="Overview" title="Key Architectural Highlights" />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
           <div className="grid grid-cols-1 gap-3 rounded-lg border border-border bg-card/70 p-4 shadow-card md:grid-cols-2">
-            {proofSignals.map((item) => (
+            {keyCapabilities.map((item) => (
               <div key={item} className="flex items-start gap-3 rounded-lg border border-border bg-bg/40 p-3">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
                 <p className="text-sm font-medium leading-relaxed text-text-primary">{item}</p>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects, getProjectBySlug } from "@/lib/projects";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
+import CodeSnippetViewer from "@/components/CodeSnippetViewer";
 import TechHighlights from "@/components/TechHighlights";
 import MetricsGrid from "@/components/MetricsGrid";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -21,9 +22,9 @@ import {
 } from "lucide-react";
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -33,7 +34,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = getProjectBySlug(params.slug);
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -57,8 +59,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ProjectCaseStudyPage({ params }: Props) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectCaseStudyPage({ params }: Props) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -193,6 +196,13 @@ export default function ProjectCaseStudyPage({ params }: Props) {
           <ScrollReveal delay={300}>
             <TechHighlights highlights={caseStudy.highlights} accentColor={project.accent} />
           </ScrollReveal>
+
+          {/* Code Implementation Snippets */}
+          {caseStudy.snippets && caseStudy.snippets.length > 0 && (
+            <ScrollReveal delay={320}>
+              <CodeSnippetViewer snippets={caseStudy.snippets} />
+            </ScrollReveal>
+          )}
 
           {/* 5. Engineering Decisions */}
           <ScrollReveal delay={350} className="flex flex-col gap-4">

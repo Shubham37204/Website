@@ -68,6 +68,61 @@ export const collabdocs: Project = {
     lessonsLearned: [
       "Handling real-time rich-text formatting requires careful synchronization between TipTap schema extensions and Y.js delta states.",
       "Streaming LLM completions directly into rich text nodes demands buffer throttling to avoid breaking active DOM cursor offsets."
+    ],
+    snippets: [
+      {
+        filename: "useYjsSync.ts",
+        language: "typescript",
+        description: "Binds client-side TipTap editor state to Y.js CRDT document and syncs delta operations via WebSockets.",
+        code: `import * as Y from "yjs";
+import { LiveblocksProvider } from "@liveblocks/yjs";
+import { useEditor } from "@tiptap/react";
+import Collaboration from "@tiptap/extension-collaboration";
+import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+
+export function useYjsSync(roomId: string, user: UserProfile) {
+  const ydoc = useMemo(() => new Y.Doc(), [roomId]);
+  const provider = useLiveblocksYjs(ydoc, roomId);
+
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({ history: false }),
+      Collaboration.configure({ document: ydoc }),
+      CollaborationCursor.configure({
+        provider,
+        user: { name: user.name, color: user.color }
+      })
+    ]
+  });
+
+  return { editor, provider };
+}`
+      },
+      {
+        filename: "groqStream.ts",
+        language: "typescript",
+        description: "Streams Llama-3 completions with token buffer throttling to preserve DOM cursor offsets.",
+        code: `import { Groq } from "groq-sdk";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+export async function POST(req: Request) {
+  const { prompt, context } = await req.json();
+
+  const response = await groq.chat.completions.create({
+    model: "llama3-70b-8192",
+    stream: true,
+    messages: [
+      { role: "system", content: "You are an inline AI writing assistant." },
+      { role: "user", content: \`Context: \${context}\\nPrompt: \${prompt}\` }
+    ]
+  });
+
+  const stream = OpenAIStream(response);
+  return new StreamingTextResponse(stream);
+}`
+      }
     ]
   }
 };

@@ -13,12 +13,12 @@ const projectLinks: Record<string, string> = {
 };
 
 const groupMeta: Record<string, { color: string; short: string }> = {
-  frontend: { color: "#0891b2", short: "FE" },
-  backend: { color: "#0d9488", short: "API" },
-  aiml: { color: "#7c3aed", short: "AI" },
-  data: { color: "#e11d48", short: "DB" },
-  devops: { color: "#d97706", short: "OPS" },
-  tooling: { color: "#059669", short: "QA" },
+  frontend: { color: "#6366f1", short: "FE" },
+  backend: { color: "#0284c7", short: "API" },
+  aiml: { color: "#8b5cf6", short: "AI" },
+  data: { color: "#f43f5e", short: "DB" },
+  devops: { color: "#f59e0b", short: "OPS" },
+  tooling: { color: "#10b981", short: "QA" },
 };
 
 const nodeLayout = [
@@ -248,40 +248,65 @@ export default function SkillsPage() {
         </section>
       </ScrollReveal>
 
-      {selectedSkillGroup && (
-        <ScrollReveal delay={160}>
-          <section className="rounded-lg border border-border bg-card p-4 shadow-card">
-            <div className="flex flex-col gap-1">
-              <span className="section-eyebrow !mb-0">Focused domain</span>
-              <h2 className="font-display text-xl font-bold text-text-primary">{selectedSkillGroup.title}</h2>
-            </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {selectedSkillGroup.items.map((item) => (
-                <div key={item.name} className="rounded-lg border border-border bg-bg/40 p-3">
-                  <p className="text-sm font-semibold text-text-primary">{item.name}</p>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {item.projects.length > 0 ? (
-                      item.projects.map((project) => (
-                        <Link
-                          key={project}
-                          href={projectLinks[project] ?? "/projects"}
-                          className="rounded-md border border-accent/20 bg-accent/10 px-2 py-0.5 font-mono text-[10px] text-accent"
-                        >
-                          {project}
-                        </Link>
-                      ))
-                    ) : (
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-muted">
-                        Studied / practiced
+      {/* Category Stack Cards Grid */}
+      <ScrollReveal delay={160}>
+        <section className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-xl font-bold text-text-primary">
+              {selectedSkillGroup ? selectedSkillGroup.title : "All Technology Stack Domains"}
+            </h2>
+            <span className="font-mono text-xs text-text-muted">
+              {selectedSkillGroup ? `${selectedSkillGroup.items.length} Skills` : `${skillGroups.length} Domain Clusters`}
+            </span>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {(selectedSkillGroup ? [selectedSkillGroup] : skillGroups).map((group) => {
+              const meta = groupMeta[group.id] ?? { color: group.color, short: "SK" };
+              return (
+                <div
+                  key={group.id}
+                  className="rounded-2xl border border-border bg-card p-5 shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col justify-between gap-4"
+                  style={{ borderTopColor: meta.color, borderTopWidth: "3px" }}
+                >
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <span className="font-display text-base font-bold text-text-primary flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: meta.color }} />
+                        {group.title}
                       </span>
-                    )}
+                      <span
+                        className="rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold uppercase"
+                        style={{
+                          borderColor: `${meta.color}40`,
+                          color: meta.color,
+                          background: `${meta.color}10`,
+                        }}
+                      >
+                        {meta.short}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 mt-1">
+                      {group.items.map((item) => (
+                        <div
+                          key={item.name}
+                          className="flex items-center gap-1.5 rounded-lg border border-border bg-bg/50 px-2.5 py-1 text-xs font-medium text-text-secondary hover:border-accent/30 hover:text-text-primary transition-colors"
+                        >
+                          <span>{item.name}</span>
+                          {item.projects.length > 0 && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" title={`Used in ${item.projects.join(", ")}`} />
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        </ScrollReveal>
-      )}
+              );
+            })}
+          </div>
+        </section>
+      </ScrollReveal>
     </div>
   );
 }

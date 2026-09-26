@@ -31,8 +31,13 @@ export default function Footer() {
           </IconButton>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-text-muted">
+        <div className="flex flex-col sm:flex-row items-center gap-3 text-xs font-mono tracking-wide text-text-muted">
           <span>&copy; {currentYear} {personalData.name}</span>
+          <span className="hidden sm:inline text-border">•</span>
+          <div className="flex items-center gap-2">
+            <span>Press <kbd className="rounded bg-card px-1.5 py-0.5 text-[10px] border border-border text-accent font-semibold">Ctrl K</kbd> for Terminal</span>
+            <span><kbd className="rounded bg-card px-1.5 py-0.5 text-[10px] border border-border text-accent font-semibold">Ctrl P</kbd> to Launch</span>
+          </div>
         </div>
       </div>
     </footer>

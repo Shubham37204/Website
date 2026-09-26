@@ -19,34 +19,34 @@ const categoryConfig = {
   education: {
     icon: GraduationCap,
     label: "Education",
-    dot: "bg-sky-500",
-    border: "border-sky-500/30",
-    bg: "bg-sky-500/08",
-    text: "text-sky-400",
+    dot: "bg-indigo-500",
+    border: "border-indigo-500/30",
+    bg: "bg-indigo-500/10",
+    text: "text-indigo-400",
   },
   project: {
     icon: FolderGit2,
     label: "Project",
-    dot: "bg-amber-400",
-    border: "border-amber-400/30",
-    bg: "bg-amber-400/08",
-    text: "text-amber-400",
+    dot: "bg-cyan-500",
+    border: "border-cyan-500/30",
+    bg: "bg-cyan-500/10",
+    text: "text-cyan-400",
   },
   certification: {
     icon: Award,
     label: "Certification",
-    dot: "bg-emerald-400",
-    border: "border-emerald-400/30",
-    bg: "bg-emerald-400/08",
+    dot: "bg-emerald-500",
+    border: "border-emerald-500/30",
+    bg: "bg-emerald-500/10",
     text: "text-emerald-400",
   },
   experience: {
     icon: Briefcase,
     label: "Experience",
-    dot: "bg-violet-400",
-    border: "border-violet-400/30",
-    bg: "bg-violet-400/08",
-    text: "text-violet-400",
+    dot: "bg-amber-500",
+    border: "border-amber-500/30",
+    bg: "bg-amber-500/10",
+    text: "text-amber-400",
   },
 };
 
@@ -114,10 +114,10 @@ export default function Timeline({ items }: TimelineProps) {
 
                 {/* Card Content */}
                 <div
-                  className={`flex-1 rounded-xl border p-4 shadow-sm transition-all duration-200 hover:shadow-card ${isLast ? "" : ""}`}
+                  className={`flex-1 rounded-2xl border bg-card p-5 shadow-card transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5 ${isLast ? "" : ""}`}
                   style={{
-                    borderColor: item.accentColor ? `${item.accentColor}25` : undefined,
-                    background: item.accentColor ? `${item.accentColor}05` : undefined,
+                    borderColor: item.accentColor ? `${item.accentColor}35` : undefined,
+                    background: item.accentColor ? `${item.accentColor}08` : undefined,
                   }}
                 >
                   {/* Header */}
